@@ -1,0 +1,1 @@
+The main goal of the project is to figure out better routing decisions over DTNs based on multi-layer social graph .
