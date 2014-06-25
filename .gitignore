@@ -36,4 +36,4 @@ Icon
 .Trashes
 
 # Class files
-.class
+*.class

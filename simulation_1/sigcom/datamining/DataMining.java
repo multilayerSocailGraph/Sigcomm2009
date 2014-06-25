@@ -35,23 +35,6 @@ public class DataMining {
 
 	/*********************************************
 	 * 
-	 * Process data files in stage_1 folder
-	 * 
-	 ****************************************/
-	private static void processStage1data() {
-		Stage1Process stage1_dataset = new Stage1Process("./Stage_1");
-		stage1_dataset.combineRelationships();
-		
-		System.out.println("Stage 1 Dataset process 1 is done.");
-		
-		Stage1Process2 stage1_dataset2 = new Stage1Process2("./Stage_1");
-		stage1_dataset2.combineRelationships();
-		
-		System.out.println("Stage 1 Dataset process 2 is done.");		
-	}
-
-	/*********************************************
-	 * 
 	 * Process raw data files in RawData folder
 	 * 
 	 * ***************************************/
