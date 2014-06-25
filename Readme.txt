@@ -4,5 +4,3 @@ Libraries used in this project:
 1, jgrapht (http://jgrapht.org/)
 2, weka (http://www.cs.waikato.ac.nz/ml/weka/)
 3, common math (http://commons.apache.org/proper/commons-math/)
-
-test branch
