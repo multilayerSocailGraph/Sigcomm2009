@@ -24,8 +24,8 @@ public class DataMining {
 	 * 
 	 ****************************************/
 	private static void processStage1data2() {
-		Stage1Process3 stage1_dataset3 = new Stage1Process3("./Stage_1");
-		stage1_dataset3.combineRelationships();
+		Stage1Process3 stage1_dataset = new Stage1Process3("./Stage_1");
+		stage1_dataset.combineRelationships();
 
 		System.out.println("Stage 1 Dataset process 3 is done.");
 
