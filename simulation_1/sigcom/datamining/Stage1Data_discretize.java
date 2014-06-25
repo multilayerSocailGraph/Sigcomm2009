@@ -9,10 +9,11 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Discretize;
 import weka.filters.unsupervised.attribute.NumericToNominal;
 
-public class Stage1Process4 extends PreprocessBase {
-	public Stage1Process4(String filefolder) {
+public class Stage1Data_discretize extends PreprocessBase {
+	public Stage1Data_discretize(String filefolder) {
 		super(filefolder);
 	}
 
@@ -168,7 +169,7 @@ public class Stage1Process4 extends PreprocessBase {
 				// friendship relationship
 				vals[20] = 0;
 				for(Instance ins : friends){
-					if(ins.value(0) == i && ins.value(1) == j){
+					if(ins.value(0) == i && ins.value(1) == j && ins.value(2) == 0){
 						vals[20] = 1;
 						break;
 					}
@@ -200,21 +201,56 @@ public class Stage1Process4 extends PreprocessBase {
 				firstFriendship.add(newIns);
 			}
 		}
+		
+		// Option for converting numeric to nominal
+		NumericToNominal convert = new NumericToNominal();
+		String[] options = new String[2];
+		options[0] = "-R";
+		options[1] = "3, 4, 5, 21"; // range of variables to make numeric		
 
 		try {
 			// Convert numeric attribute to nominal attribute
-			NumericToNominal convert = new NumericToNominal();
-			String[] options = new String[2];
-			options[0] = "-R";
-			options[1] = "3, 4, 5, 21"; // range of variables to make numeric
 			convert.setOptions(options);
 			convert.setInputFormat(firstFriendship);
-			firstFriendship = Filter.useFilter(firstFriendship, convert);
-						
+			firstFriendship = Filter.useFilter(firstFriendship, convert);			
+			
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(firstFriendship);
-			saver.setFile(new File("./Stage_2/NewfriendshipAll.arff"));
+			saver.setFile(new File("./Stage_2/Newfriendship0.arff"));
+			saver.writeBatch();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// data bytes discretizer options
+		Discretize discrBytes = new Discretize();
+		String[] discreteptions = new String[7];
+		discreteptions[0] = "-F"; // Use equal-frequency instead of equal-width discretization.
+		discreteptions[1] = "-B"; // Specifies the (maximum) number of bins to divide numeric attributes into
+		discreteptions[2] = "3"; // number of bins
+		discreteptions[3] = "-M"; // Specifies the desired weight of instances per bin for equal-frequency binning.
+		discreteptions[4] = "-1"; // default
+		discreteptions[5] = "-R"; // Attribute index
+		discreteptions[6] = "6-20"; // the second attribute
+		
+		try {
+			// Discrete data size and convert to ordinal attribute
+			discrBytes.setOptions(discreteptions);
+			discrBytes.setInputFormat(firstFriendship);
+			firstFriendship = Filter.useFilter(firstFriendship, discrBytes);
+			
+			for(int i=5; i<21; i++){
+				Attribute att = firstFriendship.attribute(i);
+				for (int n = 0; n < att.numValues(); n++) {
+					firstFriendship.renameAttributeValue(att, att.value(n), "" + n);
+				}
+			}			
+			
+			// Save modified data with discretized duration attribute
+			ArffSaver saver = new ArffSaver();
+			saver.setInstances(firstFriendship);
+			saver.setFile(new File("./Stage_2/Newfriendship_discretized.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();

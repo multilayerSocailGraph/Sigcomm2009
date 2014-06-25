@@ -9,11 +9,11 @@ public class DataMining {
 			break;
 		case 1:
 			// Process data files in stage_1 folder
-			processStage1data2();
+			processStage1data();
 			break;
 		default:
 			processRawdata();
-			processStage1data2();
+			processStage1data();
 			break;
 		}
 	}
@@ -23,17 +23,14 @@ public class DataMining {
 	 * Process data files in stage_1 folder to new format
 	 * 
 	 ****************************************/
-	private static void processStage1data2() {
-		Stage1Process3 stage1_dataset = new Stage1Process3("./Stage_1");
-		stage1_dataset.combineRelationships();
-
-		System.out.println("Stage 1 Dataset process 3 is done.");
-
-		Stage1Process4 stage1_dataset4 = new Stage1Process4("./Stage_1");
-		stage1_dataset4.combineRelationships();
-
-		System.out.println("Stage 1 Dataset process 4 is done.");
-
+	private static void processStage1data() {
+		Stage1Process stage1_dataset1 = new Stage1Process("./Stage_1");
+		stage1_dataset1.combineRelationships();
+		System.out.println("Stage 1 Data process is done.");
+		
+		Stage1Data_discretize stage1_dataset2 = new Stage1Data_discretize("./Stage_1");
+		stage1_dataset2.combineRelationships();
+		System.out.println("Stage 1 Data discretize is done.");	
 	}
 
 	/*********************************************
