@@ -14,7 +14,7 @@ public class Run {
 		// 1: Only process data in stage 1 folder
 		// otherwise process both.
 		int dataProcessFlag = 1;
-		DataMining.dataProcess();
+		DataMining.dataProcess(dataProcessFlag);
 		
 		// Simulation.comparation();
 
