@@ -1,7 +1,7 @@
 package sigcom.datamining;
 
 public class DataMining {
-	public static void dataProcess() {
+	public static void dataProcess(int dataProcessFlag) {
 		
 		// Process raw data files in RawData folder
 		//processRawdata();
