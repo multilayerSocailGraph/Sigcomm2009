@@ -2,18 +2,6 @@ package sigcom.datamining;
 
 public class DataMining {
 	public static void dataProcess(int dataProcessFlag) {
-<<<<<<< HEAD
-		
-		// Process raw data files in RawData folder
-		//processRawdata();
-
-		// Process data files in stage_1 folder
-		//processStage1data();	
-		
-		// Process data files in stage_1 folder in new format
-		processStage1data2();	
-=======
->>>>>>> ChaoBranch
 
 		switch (dataProcessFlag) {
 		case 0:
@@ -36,21 +24,16 @@ public class DataMining {
 	 * 
 	 ****************************************/
 	private static void processStage1data2() {
-		Stage1Process3 stage1_dataset3 = new Stage1Process3("./Stage_1");
-		stage1_dataset3.combineRelationships();
-
+		Stage1Process3 stage1_dataset = new Stage1Process3("./Stage_1");
+		stage1_dataset.combineRelationships();
 		System.out.println("Stage 1 Dataset process 3 is done.");
 
 		Stage1Process4 stage1_dataset4 = new Stage1Process4("./Stage_1");
 		stage1_dataset4.combineRelationships();
-
-<<<<<<< HEAD
-=======
 		System.out.println("Stage 1 Dataset process 4 is done.");
 
 	}
 
->>>>>>> ChaoBranch
 	/*********************************************
 	 * 
 	 * Process raw data files in RawData folder
