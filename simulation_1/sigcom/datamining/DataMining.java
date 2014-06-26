@@ -20,7 +20,7 @@ public class DataMining {
 
 	/*********************************************
 	 * 
-	 * Process data files in stage_1 folder to new format
+	 * Process data files in stage_1 folder
 	 * 
 	 ****************************************/
 	private static void processStage1data() {
@@ -30,7 +30,11 @@ public class DataMining {
 		
 		Stage1Data_discretize stage1_dataset2 = new Stage1Data_discretize("./Stage_1");
 		stage1_dataset2.combineRelationships();
-		System.out.println("Stage 1 Data discretize is done.");	
+		System.out.println("Stage 1 Data discretize is done.");
+		
+		Stage1TemporalFriends stage1_dataset3 = new Stage1TemporalFriends("./Stage_1");
+		stage1_dataset3.combineRelationships();		
+		System.out.println("Stage 1 Dataset process Temporal Friends is done.");
 	}
 
 	/*********************************************
