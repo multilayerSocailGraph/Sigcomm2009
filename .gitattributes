@@ -1,6 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
+<<<<<<< HEAD
 # Custom for Visual Studio
 *.cs     diff=csharp
 *.sln    merge=union
@@ -20,3 +21,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+=======
+# Custom for eclipse java project
+*.java
+>>>>>>> 43295f2803c6b41c629ab905f6bc61a975e69fc0

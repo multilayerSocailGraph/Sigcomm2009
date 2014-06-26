@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -34,3 +35,7 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+=======
+# Class files
+*.class
+>>>>>>> 43295f2803c6b41c629ab905f6bc61a975e69fc0
