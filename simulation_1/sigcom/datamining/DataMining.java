@@ -32,9 +32,10 @@ public class DataMining {
 		stage1_dataset2.combineRelationships();
 		System.out.println("Stage 1 Data discretize is done.");
 		
-		Stage1TemporalFriends stage1_dataset3 = new Stage1TemporalFriends("./Stage_1");
-		stage1_dataset3.combineRelationships();		
-		System.out.println("Stage 1 Dataset process Temporal Friends is done.");
+		// Not ready yet
+		//Stage1TemporalFriends stage1_dataset3 = new Stage1TemporalFriends("./Stage_1");
+		//stage1_dataset3.combineRelationships();		
+		//System.out.println("Stage 1 Dataset process Temporal Friends is done.");
 	}
 
 	/*********************************************

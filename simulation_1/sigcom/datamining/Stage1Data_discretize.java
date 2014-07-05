@@ -35,7 +35,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 		 */
 		ArrayList<Attribute> atts = new ArrayList<Attribute>();
 		atts.add(new Attribute("senderId"));
-		atts.add(new Attribute("recieverId"));	
+		atts.add(new Attribute("recieverId"));
 		atts.add(new Attribute("same_institution"));
 		atts.add(new Attribute("same_city"));
 		atts.add(new Attribute("same_country"));
@@ -195,8 +195,8 @@ public class Stage1Data_discretize extends PreprocessBase {
 						}
 					}
 				}
-				vals[19] = commonInterest_count;
-				
+				vals[19] = (commonInterest_count > 0)? 1 : 0 ;
+								
 				DenseInstance newIns = new DenseInstance(1.0, vals);				
 				firstFriendship.add(newIns);
 			}
@@ -206,7 +206,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 		NumericToNominal convert = new NumericToNominal();
 		String[] options = new String[2];
 		options[0] = "-R";
-		options[1] = "3, 4, 5, 21"; // range of variables to make numeric		
+		options[1] = "3, 4, 5, 20, 21"; // range of variables to make nominal		
 
 		try {
 			// Convert numeric attribute to nominal attribute
@@ -217,7 +217,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(firstFriendship);
-			saver.setFile(new File("./Stage_2/Newfriendship0.arff"));
+			saver.setFile(new File("./Stage_2/beforeDiscretize.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -228,11 +228,11 @@ public class Stage1Data_discretize extends PreprocessBase {
 		String[] discreteptions = new String[7];
 		discreteptions[0] = "-F"; // Use equal-frequency instead of equal-width discretization.
 		discreteptions[1] = "-B"; // Specifies the (maximum) number of bins to divide numeric attributes into
-		discreteptions[2] = "3"; // number of bins
+		discreteptions[2] = "2"; // number of bins
 		discreteptions[3] = "-M"; // Specifies the desired weight of instances per bin for equal-frequency binning.
 		discreteptions[4] = "-1"; // default
 		discreteptions[5] = "-R"; // Attribute index
-		discreteptions[6] = "6-20"; // the second attribute
+		discreteptions[6] = "6-19"; // the second attribute
 		
 		try {
 			// Discrete data size and convert to ordinal attribute
@@ -245,7 +245,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 				for (int n = 0; n < att.numValues(); n++) {
 					firstFriendship.renameAttributeValue(att, att.value(n), "" + n);
 				}
-			}			
+			}
 			
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
