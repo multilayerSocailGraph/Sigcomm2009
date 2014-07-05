@@ -195,7 +195,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 						}
 					}
 				}
-				vals[19] = (commonInterest_count > 0)? 1 : 0;
+				vals[19] = (commonInterest_count > 0)? 1 : 0 ;
 								
 				DenseInstance newIns = new DenseInstance(1.0, vals);				
 				firstFriendship.add(newIns);
@@ -217,7 +217,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(firstFriendship);
-			saver.setFile(new File("./Stage_2/Newfriendship0.arff"));
+			saver.setFile(new File("./Stage_2/beforeDiscretize.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -228,7 +228,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 		String[] discreteptions = new String[7];
 		discreteptions[0] = "-F"; // Use equal-frequency instead of equal-width discretization.
 		discreteptions[1] = "-B"; // Specifies the (maximum) number of bins to divide numeric attributes into
-		discreteptions[2] = "3"; // number of bins
+		discreteptions[2] = "2"; // number of bins
 		discreteptions[3] = "-M"; // Specifies the desired weight of instances per bin for equal-frequency binning.
 		discreteptions[4] = "-1"; // default
 		discreteptions[5] = "-R"; // Attribute index

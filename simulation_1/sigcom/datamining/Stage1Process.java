@@ -57,7 +57,7 @@ public class Stage1Process extends PreprocessBase {
 		Instances firstFriendship = new Instances("Initailfriends", atts, 0);
 		// Fill data into new instances
 		double[] vals;
-		for (int i = 1; i < 77; i++) {			
+		for (int i = 1; i < 77; i++) {
 			for (int j = 1; j < 77; j++) {
 				vals = new double[firstFriendship.numAttributes()];
 				vals[0] = i;
@@ -168,7 +168,7 @@ public class Stage1Process extends PreprocessBase {
 				// friendship relationship
 				vals[20] = 0;
 				for(Instance ins : friends){
-					if(ins.value(0) == i && ins.value(1) == j){
+					if(ins.value(0) == i && ins.value(1) == j && ins.value(2) == 0){
 						vals[20] = 1;
 						break;
 					}
@@ -206,7 +206,7 @@ public class Stage1Process extends PreprocessBase {
 			NumericToNominal convert = new NumericToNominal();
 			String[] options = new String[2];
 			options[0] = "-R";
-			options[1] = "3, 4, 5, 21"; // range of variables to make numeric
+			options[1] = "3, 4, 5"; // range of variables to make numeric
 			convert.setOptions(options);
 			convert.setInputFormat(firstFriendship);
 			firstFriendship = Filter.useFilter(firstFriendship, convert);
@@ -214,7 +214,7 @@ public class Stage1Process extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(firstFriendship);
-			saver.setFile(new File("./Stage_2/NewfriendshipAll.arff"));
+			saver.setFile(new File("./Stage_2/Newfriendship0.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
