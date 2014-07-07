@@ -30,6 +30,10 @@ class BeforeRouting
 		System.out.println("start create friendShipMatrix...");
 		createFriendShipMatrix();
 		System.out.println("create friendShipMatrix complete!\n");
+		
+		System.out.println("start create CommonFriendsMatrix...");
+		createCommonFriendsMatrix();
+		System.out.println("create CommonFriendsMatrix complete!\n");
 	}
 	
 	public void createValidNodes()
@@ -91,7 +95,7 @@ class BeforeRouting
 		}
 		//获得contactDuration矩阵
 		Main.friendShipMatrix = new int[Main.validNodes.length][Main.validNodes.length];
-		scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();
+		scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();
 		while (scan.hasNextLine()) 
 		{
 			String temp = scan.nextLine();
@@ -115,6 +119,53 @@ class BeforeRouting
 			}
 		}
 		scan.close();
+	}
+	
+	private void createCommonFriendsMatrix()
+	{
+		File f = new File("Stage_2/friendshipDM.arff");
+		Scanner scan = null;
+		try {
+			scan = new Scanner(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		//获得contactDuration矩阵
+		Main.commonFriends = new int[Main.validNodes.length][Main.validNodes.length];
+		
+		int[] friendsOfNodeI = new int[Main.commonFriends.length];
+		int[] friendsOfNodeJ = new int[Main.commonFriends.length];
+		for(int i = 0; i<Main.commonFriends.length; i++)
+		{
+			for(int j = 0; j<Main.commonFriends.length; j++)
+			{
+				Main.commonFriends[i][j] = 0;
+				for(int q = 0; q<Main.friendShipMatrix.length; q++)
+				{
+					friendsOfNodeI[q] = 0;
+					friendsOfNodeJ[q] = 0;
+				}
+				for(int k = 0; k<Main.friendShipMatrix.length; k++)
+				{
+					if(Main.friendShipMatrix[i][k] == 1)
+						friendsOfNodeI[k] = 1;
+				}
+				for(int w = 0; w<Main.friendShipMatrix.length; w++)
+				{
+					if(Main.friendShipMatrix[j][w] == 1)
+						friendsOfNodeJ[w] = 1;
+				}
+				for(int t = 0; t<Main.friendShipMatrix.length; t++)
+				{
+					if(friendsOfNodeI[t] == 1 && friendsOfNodeJ[t] == 1)
+					{
+						Main.commonFriends[i][j]++;
+					}
+				}
+			}
+		}
+
+		
 	}
 
 	

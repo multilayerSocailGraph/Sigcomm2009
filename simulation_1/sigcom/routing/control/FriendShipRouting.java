@@ -111,8 +111,9 @@ public class FriendShipRouting
 					}
 					else
 					{//还没转发到目的节点
-						double friendShip = 1.0f*Main.friendShipMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes];
-						if(friendShip > 0)
+						//double friendShip = 1.0f*Main.friendShipMatrix[node.indexInValidNodes][desNode.indexInValidNodes];
+						//if(friendShip > 0)
+						if(Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes] > Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes])
 						{
 							preNode.msgQueue.getFirst().TTL--;
 							if(preNode.msgQueue.getFirst().TTL == 0)

@@ -9,6 +9,7 @@ public class Main
 {
 	public static Node[] validNodes;			//被选节点
 	public static int[][] friendShipMatrix;
+	public static int[][] commonFriends;    //两个节点共同朋友的个数
 	
 	public static int testTimes = BeforeRouting.test_TimeArray.length-1;//进行的测试次数
 	public static int[] coupleArray = new int[testTimes];//某次测试的样例数，样例事先在程序中已设定好，一般在每个路由算法的构造函数中设定
@@ -25,6 +26,16 @@ public class Main
 	{
 		BeforeRouting beforeRounting = new BeforeRouting();
 		beforeRounting.createMatrix();
+//		System.out.println("\n"+"commonFriendsMatrix:\n");
+//		for(int i = 0; i<Main.commonFriends.length; i++)
+//		{
+//			for(int j=0; j<Main.commonFriends.length; j++)
+//			{
+//				System.out.print(Main.commonFriends[i][j]+"\t");
+//			}
+//			System.out.println();
+//		}
+			
 		Main.load = new int[Main.validNodes.length];
 		
 		System.out.println("\n------------------FriendShipRouting--------------");
@@ -68,7 +79,10 @@ public class Main
 		{
 			double forward = (double)forwardArray[i]/6006;
 			DecimalFormat df = new DecimalFormat("#.000");
-			System.out.print(df.format(forward)+",");
+			if(forward >= 1)
+				System.out.print(df.format(forward)+",");
+			else
+				System.out.print("0"+df.format(forward)+",");
 		}
 		System.out.print("\nmaxLoad:");
 		for(int i = 0; i<testTimes; i++)
