@@ -26,28 +26,28 @@ public class Main
 	{
 		BeforeRouting beforeRounting = new BeforeRouting();
 		beforeRounting.createMatrix();
-//		System.out.println("\n"+"commonFriendsMatrix:\n");
-//		for(int i = 0; i<Main.commonFriends.length; i++)
-//		{
-//			for(int j=0; j<Main.commonFriends.length; j++)
-//			{
-//				System.out.print(Main.commonFriends[i][j]+"\t");
-//			}
-//			System.out.println();
-//		}
-			
-		Main.load = new int[Main.validNodes.length];
-		
-		System.out.println("\n------------------FriendShipRouting--------------");
-		clearData();
-		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+		System.out.println("\n"+"commonFriends:\n");
+		for(int i = 0; i<Main.commonFriends.length; i++)
 		{
-			FriendShipRouting friendshipRouting = new FriendShipRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			friendshipRouting.execute();
-			friendshipRouting.calcPerformance(i);
-			Main.clearLoad();
+			for(int j=0; j<Main.commonFriends.length; j++)
+			{
+				System.out.print(Main.commonFriends[i][j]+"\t");
+			}
+			System.out.println();
 		}
-		showPerformance();
+			
+//		Main.load = new int[Main.validNodes.length];
+//		
+//		System.out.println("\n------------------FriendShipRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+//		{
+//			FriendShipRouting friendshipRouting = new FriendShipRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			friendshipRouting.execute();
+//			friendshipRouting.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
 		
 	}
 	
