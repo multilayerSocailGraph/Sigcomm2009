@@ -123,7 +123,6 @@ public class FriendShipRouting
 						 * 如果当前节点所遇到节点与目的节点的共同朋友的个数 比 它与目的节点共同朋友的个数多的时候，那么当前节点就把数据报转发给遇到的节点，否则等待...
 						 */
 //						if(Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes] > Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes])
-						
 						/*
 						 * version 3:
 						 * combine version1 and version 2.

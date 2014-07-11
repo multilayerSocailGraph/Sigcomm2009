@@ -18,8 +18,10 @@ public class Sort
 		// TODO Auto-generated method stub
 		File f = new File("Stage_2/friendshipDM.arff");
 		Vector<Hang> list = new Vector<Hang>();
+		BufferedReader br;
+		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(f));
+			br = new BufferedReader(new FileReader(f));
 			String temp;
 			br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();
 			br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();br.readLine();
@@ -73,6 +75,7 @@ public class Sort
 				return 0;
 		}
 	};
+	
 
 }
 

@@ -1,15 +1,17 @@
 package sigcom.routing.control;
 
 import java.text.DecimalFormat;
-
 import sigcom.routing.model.Node;
-
   
 public class Main
 {
 	public static Node[] validNodes;			//被选节点
 	public static int[][] friendShipMatrix;
 	public static int[][] commonFriends;    //两个节点共同朋友的个数
+	public static int[][] socialGraphMatrix;
+	public static double[] betweeness;
+	public static int[][] similarityMatrix;
+	public static int[][] contactCountMatrix;
 	
 	public static int testTimes = BeforeRouting.test_TimeArray.length-1;//进行的测试次数
 	public static int[] coupleArray = new int[testTimes];//某次测试的样例数，样例事先在程序中已设定好，一般在每个路由算法的构造函数中设定
@@ -26,18 +28,9 @@ public class Main
 	{
 		BeforeRouting beforeRounting = new BeforeRouting();
 		beforeRounting.createMatrix();
-		System.out.println("\n"+"commonFriends:\n");
-		for(int i = 0; i<Main.commonFriends.length; i++)
-		{
-			for(int j=0; j<Main.commonFriends.length; j++)
-			{
-				System.out.print(Main.commonFriends[i][j]+"\t");
-			}
-			System.out.println();
-		}
 			
-//		Main.load = new int[Main.validNodes.length];
-//		
+		Main.load = new int[Main.validNodes.length];
+		
 //		System.out.println("\n------------------FriendShipRouting--------------");
 //		clearData();
 //		for(int i = 0; i<testTimes; i++)//FriendShipRouting
@@ -45,6 +38,28 @@ public class Main
 //			FriendShipRouting friendshipRouting = new FriendShipRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
 //			friendshipRouting.execute();
 //			friendshipRouting.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
+		
+		System.out.println("\n------------------FriendShipRoutingV4--------------");
+		clearData();
+		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+		{
+			FriendShipRoutingV4 friendshipRoutingV4 = new FriendShipRoutingV4(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			friendshipRoutingV4.execute();
+			friendshipRoutingV4.calcPerformance(i);
+			Main.clearLoad();
+		}
+		showPerformance();
+		
+//		System.out.println("\n------------------EpidemicRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+//		{
+//			EpidemicRouting epidemic = new EpidemicRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			epidemic.execute();
+//			epidemic.calcPerformance(i);
 //			Main.clearLoad();
 //		}
 //		showPerformance();

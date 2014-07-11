@@ -5,18 +5,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.StringTokenizer;
+import java.util.Vector;
+
 import sigcom.routing.model.Node;
 
 
 class BeforeRouting 
 {
 	int train_Start_Time = 0;//训练的开始时间(sortedContact.dat文件中节点开始发送数据的时间)
-	int train_End_Time = 150000;//训练的结束时间<--------->同时也是开始测试的时间
-
+	int train_End_Time = 160000;//训练的结束时间<--------->同时也是开始测试的时间
+	
 	static int[] test_TimeArray = {160000,167200,174400,181600,188800,196000,203200,210400,217600,224800,232000,239200,246400,253600,260800,268000,275200,282400,289600,296800};
-//	static int test_End_Time = 340808;//测试结束时间(sortedContact.dat文件中节点最后一次发送数据的时间)
+	//static int test_End_Time = 340808;//测试结束时间(sortedContact.dat文件中节点最后一次发送数据的时间)
 	
 	public BeforeRouting()
 	{
@@ -34,6 +40,22 @@ class BeforeRouting
 		System.out.println("start create CommonFriendsMatrix...");
 		createCommonFriendsMatrix();
 		System.out.println("create CommonFriendsMatrix complete!\n");
+		
+		System.out.println("start create contactCountMatrix...");
+		createContactCountMatrix();
+		System.out.println("create contactCountMatrix complete!\n");
+		
+		System.out.println("start create socialGraphMatrix...");
+		createSocialGraphMatrix();
+		System.out.println("create socialGraphMatrix complete!\n");
+		
+		System.out.println("start create betweenessArray...");
+		createBetweenessArray();
+		System.out.println("create betweenessArray complete!\n");
+		
+		System.out.println("start create similarityMatrix...");
+		createSimilarityMatrix();
+		System.out.println("create similarityMatrix complete!\n");
 	}
 	
 	public void createValidNodes()
@@ -107,10 +129,10 @@ class BeforeRouting
 			Node desNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
 			if(srcNode == null || desNode == null)
 				continue;
-			int startTime = Integer.parseInt(tempTokenizer.nextToken());
+			tempTokenizer.nextToken();
 			int friendShip = Integer.parseInt(tempTokenizer.nextToken());
 			
-			if(srcNode.indexInValidNodes >= 0 && desNode.indexInValidNodes >= 0 && startTime >= train_Start_Time && startTime <=train_End_Time)
+			if(srcNode.indexInValidNodes >= 0 && desNode.indexInValidNodes >= 0)
 			{
 				Main.friendShipMatrix[srcNode.indexInValidNodes][desNode.indexInValidNodes] = friendShip;
 				Main.friendShipMatrix[desNode.indexInValidNodes][srcNode.indexInValidNodes] = friendShip;
@@ -123,13 +145,6 @@ class BeforeRouting
 	
 	private void createCommonFriendsMatrix()
 	{
-		File f = new File("Stage_2/friendshipDM.arff");
-		Scanner scan = null;
-		try {
-			scan = new Scanner(f);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
 		//获得contactDuration矩阵
 		Main.commonFriends = new int[Main.validNodes.length][Main.validNodes.length];
 		
@@ -168,5 +183,145 @@ class BeforeRouting
 		
 	}
 
+	private void createSocialGraphMatrix()
+	{
+		Main.socialGraphMatrix = new int[Main.validNodes.length][Main.validNodes.length];
+		for(int i = 0; i < Main.validNodes.length; i++)
+		{
+			for(int j = i; j < Main.validNodes.length; j++) 
+			{
+				//if(Main.friendShipMatrix[i][j] == 1 || Main.commonFriends[i][j] >= 1)
+				if(Main.contactCountMatrix[i][j] >= 1)
+					Main.socialGraphMatrix[i][j] = Main.socialGraphMatrix[j][i] = 1;
+			}
+		}
+	}
+
+	private void createContactCountMatrix()
+	{
+		File f = new File("Stage_2/friendshipDM_sorted.arff");
+		Scanner scan = null;
+		try {
+			scan = new Scanner(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		Main.contactCountMatrix = new int[Main.validNodes.length][Main.validNodes.length];
+		while (scan.hasNextLine()) 
+		{
+			String temp = scan.nextLine();
+			StringTokenizer tempTokenizer = new StringTokenizer(temp,",");
+			tempTokenizer.nextToken();tempTokenizer.nextToken();
+			Node srcNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
+			Node desNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
+			if(srcNode == null || desNode == null)
+				continue;
+			int startTime = Integer.parseInt(tempTokenizer.nextToken());
+			
+			if(srcNode.indexInValidNodes >= 0 && desNode.indexInValidNodes >= 0  && startTime >= train_Start_Time && startTime < train_End_Time)
+			{
+				Main.contactCountMatrix[srcNode.indexInValidNodes][desNode.indexInValidNodes] += 1;
+				Main.contactCountMatrix[desNode.indexInValidNodes][srcNode.indexInValidNodes] += 1;
+			}
+		}
+		scan.close();
+	}
+	
+	private void createBetweenessArray()
+	{
+		int nodeNum = Main.validNodes.length;
+		Main.betweeness = new double[nodeNum];
+		for(int i = 0; i < nodeNum; i++) 
+		{
+			Main.betweeness[i] = 0;
+		}
+		for(int s = 0; s < nodeNum; s++) 
+		{
+			Vector<ArrayList<Integer>> p = new Vector<ArrayList<Integer>>();
+			for(int i = 0; i < nodeNum; i++) 
+			{
+				p.add(new ArrayList<Integer>());
+			}
+			Stack<Integer> S = new Stack<Integer>();
+			Queue<Integer> Q = new LinkedList<Integer>();
+			double[] delta = new double[nodeNum];
+	   	  	for(int h = 0; h < nodeNum; h++) 
+	   	  	{
+	   	  		delta[h] = 0.0;
+	   	  	}
+	   	  	delta[s] = 1.0;
+	   	  	int[] d = new int[nodeNum];
+	   	  	for(int e = 0 ; e < nodeNum; e++) {
+	   	  		d[e] = -1;
+	   	  	}
+	   	  	d[s] = 0;
+	   	  	Q.add(s);
+	   	  	while(!Q.isEmpty())
+	   	  	{
+	   	  		int v = Q.remove();
+	   	  		S.push(v);
+	   	  		for(int w = 0; w < nodeNum; w++) 
+	   	  		{
+	   	  			if(Main.socialGraphMatrix[v][w]!=0 && w != v) 
+	   	  			{
+	   	  				if(d[w] < 0) 
+	   	  				{
+	   	  					Q.add(w);
+	   	  					d[w] = d[v] +1;
+	   	  				}
+	   	  				//shortest path to w via v
+	   	  				if(d[w] == d[v] +1 && w != v)
+	   	  				{
+	   	  					delta[w] = delta[w] +delta[v];
+	   	  					p.elementAt(w).add(v);
+	   	  				}
+	   	  			}
+	   	  		}
+	   	  	}
+	   	  	
+	   	  	double[] sum = new double[nodeNum];
+	   	  	int v;
+	   	  	for(v = 0; v < nodeNum; v++) 
+	   	  	{
+	   	  		sum[v]=0;
+	   	  	}
+	   	  	
+	   	  	while(!S.empty()) 
+	   	  	{
+	   	  		int w = S.pop();
+	   	  		Iterator<Integer> ix = p.elementAt(w).iterator();
+	   	  		while(ix.hasNext()) 
+	   	  		{
+	   	  			int tmp = (Integer) ix.next();
+	   	  			sum[tmp] = sum[tmp] + (delta[tmp] / delta[w]) * (1.0 + sum[w]);
+	   	  		}
+	   	  		if(w != s)
+	   	  		Main.betweeness[w] = Main.betweeness[w] + sum[w] / 2.0;
+	   	  	}
+		}
+		
+		
+	}
+
+	private void createSimilarityMatrix()
+	{
+		Main.similarityMatrix = new int[Main.validNodes.length][Main.validNodes.length];
+		int temp;
+		for(int i = 0; i < Main.validNodes.length; i++)
+		{
+			for(int j = Main.validNodes.length - 1; j >= i; j--) 
+			{
+				temp = 0;
+				for(int k = 0; k < Main.validNodes.length; k++) 
+				{
+					if(Main.socialGraphMatrix[i][k] == 1 && Main.socialGraphMatrix[j][k] == 1)
+						temp++;
+				}
+				Main.similarityMatrix[i][j] = temp;
+				Main.similarityMatrix[j][i] = temp;
+			}
+		}
+	}
 	
 }
