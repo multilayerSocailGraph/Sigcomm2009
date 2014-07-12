@@ -1,7 +1,6 @@
 package sigcom.datamining;
 
 import java.util.ArrayList;
-import weka.core.Instance;
 import weka.core.Instances;
 
 public class Initial_Phase {
