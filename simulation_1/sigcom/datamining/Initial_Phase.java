@@ -1,8 +1,6 @@
 package sigcom.datamining;
 
 import java.util.ArrayList;
-
-import sigcom.datamining.RawDataProcess;
 import weka.core.Instance;
 import weka.core.Instances;
 
