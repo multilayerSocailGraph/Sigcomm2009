@@ -29,7 +29,7 @@ public class FriendShipRoutingV4
 			}
 		}
 		
-		File f = new File("Stage_2/friendshipDM_sorted.arff");
+		File f = new File("Stage_2/proximities_sorted.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
@@ -41,14 +41,14 @@ public class FriendShipRoutingV4
 		{
 			String temp = scan.nextLine();
 			StringTokenizer tempTokenizer = new StringTokenizer(temp,",");
-			tempTokenizer.nextToken();tempTokenizer.nextToken();
+			//tempTokenizer.nextToken();tempTokenizer.nextToken();
 			
+			int startTime = Integer.parseInt(tempTokenizer.nextToken());
 			String firstNodeName = tempTokenizer.nextToken();
 			Node firstNode = Node.findNodeByName(firstNodeName, Main.validNodes);
 			String secondNodeName = tempTokenizer.nextToken();
 			Node secondNode = Node.findNodeByName(secondNodeName, Main.validNodes);
 			
-			int startTime = Integer.parseInt(tempTokenizer.nextToken());
 			if(firstNode != null && secondNode != null &&
 					startTime >= test_startTime && startTime <= test_endTime)
 			{

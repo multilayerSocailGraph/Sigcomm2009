@@ -18,10 +18,10 @@ import sigcom.routing.model.Node;
 
 class BeforeRouting 
 {
-	int train_Start_Time = 0;//训练的开始时间(sortedContact.dat文件中节点开始发送数据的时间)
-	int train_End_Time = 160000;//训练的结束时间<--------->同时也是开始测试的时间
+	int train_Start_Time = 0;	//训练的开始时间(sortedContact.dat文件中节点开始发送数据的时间)
+	int train_End_Time = 80000;//训练的结束时间<--------->同时也是开始测试的时间
 	
-	static int[] test_TimeArray = {160000,167200,174400,181600,188800,196000,203200,210400,217600,224800,232000,239200,246400,253600,260800,268000,275200,282400,289600,296800};
+	static int[] test_TimeArray = {0,3600,7200,10800,14400,18000,21600,25200,28800,32400,36000,39600,43200,46800,50400,54000,57600,61200,64800,68400,72000,75600,79200,82800,86400,90000,93600,97200,100800,104400,108000,111600,115200,118800,122400,126000,129600,133200,136800,140400,144000,147600,151200,154800,158400,162000,165600,169200,172800,176400,180000,183600,187200,190800,194400,198000,201600,205200,208800,212400,216000,219600,223200,226800,230400,234000,237600,241200,244800,248400,252000,255600,259200,262800,266400,270000,273600,277200,280800,284400,288000,291600,295200,298800};
 	//static int test_End_Time = 340808;//测试结束时间(sortedContact.dat文件中节点最后一次发送数据的时间)
 	
 	public BeforeRouting()
@@ -199,7 +199,7 @@ class BeforeRouting
 
 	private void createContactCountMatrix()
 	{
-		File f = new File("Stage_2/friendshipDM_sorted.arff");
+		File f = new File("Stage_1/proximities.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
@@ -208,16 +208,17 @@ class BeforeRouting
 		}
 
 		Main.contactCountMatrix = new int[Main.validNodes.length][Main.validNodes.length];
+		scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();
+		scan.nextLine();scan.nextLine();scan.nextLine();
 		while (scan.hasNextLine()) 
 		{
 			String temp = scan.nextLine();
 			StringTokenizer tempTokenizer = new StringTokenizer(temp,",");
-			tempTokenizer.nextToken();tempTokenizer.nextToken();
+			int startTime = Integer.parseInt(tempTokenizer.nextToken());
 			Node srcNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
 			Node desNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
 			if(srcNode == null || desNode == null)
 				continue;
-			int startTime = Integer.parseInt(tempTokenizer.nextToken());
 			
 			if(srcNode.indexInValidNodes >= 0 && desNode.indexInValidNodes >= 0  && startTime >= train_Start_Time && startTime < train_End_Time)
 			{

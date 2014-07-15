@@ -42,27 +42,27 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------FriendShipRoutingV4--------------");
-		clearData();
-		for(int i = 0; i<testTimes; i++)//FriendShipRouting
-		{
-			FriendShipRoutingV4 friendshipRoutingV4 = new FriendShipRoutingV4(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			friendshipRoutingV4.execute();
-			friendshipRoutingV4.calcPerformance(i);
-			Main.clearLoad();
-		}
-		showPerformance();
-		
-//		System.out.println("\n------------------EpidemicRouting--------------");
+//		System.out.println("\n------------------FriendShipRoutingV4--------------");
 //		clearData();
 //		for(int i = 0; i<testTimes; i++)//FriendShipRouting
 //		{
-//			EpidemicRouting epidemic = new EpidemicRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-//			epidemic.execute();
-//			epidemic.calcPerformance(i);
+//			FriendShipRoutingV4 friendshipRoutingV4 = new FriendShipRoutingV4(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			friendshipRoutingV4.execute();
+//			friendshipRoutingV4.calcPerformance(i);
 //			Main.clearLoad();
 //		}
 //		showPerformance();
+		
+		System.out.println("\n------------------EpidemicRouting--------------");
+		clearData();
+		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+		{
+			EpidemicRouting epidemic = new EpidemicRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			epidemic.execute();
+			epidemic.calcPerformance(i);
+			Main.clearLoad();
+		}
+		showPerformance();
 		
 	}
 	
