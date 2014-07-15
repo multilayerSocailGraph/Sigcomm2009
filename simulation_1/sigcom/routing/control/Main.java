@@ -12,6 +12,7 @@ public class Main
 	public static double[] betweeness;
 	public static int[][] similarityMatrix;
 	public static int[][] contactCountMatrix;
+	public static int[][] transmissionCountMatrix;
 	
 	public static int testTimes = BeforeRouting.test_TimeArray.length-1;//进行的测试次数
 	public static int[] coupleArray = new int[testTimes];//某次测试的样例数，样例事先在程序中已设定好，一般在每个路由算法的构造函数中设定
@@ -53,13 +54,24 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------EpidemicRouting--------------");
+//		System.out.println("\n------------------EpidemicRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+//		{
+//			EpidemicRouting epidemic = new EpidemicRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			epidemic.execute();
+//			epidemic.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
+		
+		System.out.println("\n------------------TransmissionRouting--------------");
 		clearData();
-		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+		for(int i = 0; i<testTimes; i++)
 		{
-			EpidemicRouting epidemic = new EpidemicRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			epidemic.execute();
-			epidemic.calcPerformance(i);
+			TransmissionRouting transRouting = new TransmissionRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			transRouting.execute();
+			transRouting.calcPerformance(i);
 			Main.clearLoad();
 		}
 		showPerformance();

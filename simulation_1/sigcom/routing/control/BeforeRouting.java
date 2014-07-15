@@ -21,7 +21,7 @@ class BeforeRouting
 	int train_Start_Time = 0;	//训练的开始时间(sortedContact.dat文件中节点开始发送数据的时间)
 	int train_End_Time = 80000;//训练的结束时间<--------->同时也是开始测试的时间
 	
-	static int[] test_TimeArray = {0,3600,7200,10800,14400,18000,21600,25200,28800,32400,36000,39600,43200,46800,50400,54000,57600,61200,64800,68400,72000,75600,79200,82800,86400,90000,93600,97200,100800,104400,108000,111600,115200,118800,122400,126000,129600,133200,136800,140400,144000,147600,151200,154800,158400,162000,165600,169200,172800,176400,180000,183600,187200,190800,194400,198000,201600,205200,208800,212400,216000,219600,223200,226800,230400,234000,237600,241200,244800,248400,252000,255600,259200,262800,266400,270000,273600,277200,280800,284400,288000,291600,295200,298800};
+	static int[] test_TimeArray = {80000,83600,87200,90800,94400,98000,101600,105200,108800,112400,116000,119600,123200,126800,130400,134000,137600,141200,144800,148400,152000,155600,159200,162800,166400,170000,173600,177200,180800,184400,188000,191600,195200,198800};
 	//static int test_End_Time = 340808;//测试结束时间(sortedContact.dat文件中节点最后一次发送数据的时间)
 	
 	public BeforeRouting()
@@ -56,6 +56,10 @@ class BeforeRouting
 		System.out.println("start create similarityMatrix...");
 		createSimilarityMatrix();
 		System.out.println("create similarityMatrix complete!\n");
+		
+		System.out.println("start create transmissionCountMatrix...");
+		createtransmissionCountMatrix();
+		System.out.println("create transmissionCountMatrix complete!\n");
 	}
 	
 	public void createValidNodes()
@@ -180,7 +184,40 @@ class BeforeRouting
 			}
 		}
 
-		
+	}
+	
+	private void createtransmissionCountMatrix()
+	{
+		File f = new File("stage_1/transmissions.arff");
+		Scanner scan = null;
+		try {
+			scan = new Scanner(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		//获得contactDuration矩阵
+		Main.transmissionCountMatrix = new int[Main.validNodes.length][Main.validNodes.length];
+		scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();
+		while (scan.hasNextLine()) 
+		{
+			String temp = scan.nextLine();
+			
+			StringTokenizer tempTokenizer = new StringTokenizer(temp,",");
+			tempTokenizer.nextToken();
+			tempTokenizer.nextToken();
+			Node srcNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
+			Node desNode = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
+			if(srcNode == null || desNode == null)
+				continue;
+			
+			if(srcNode.indexInValidNodes >= 0 && desNode.indexInValidNodes >= 0)
+			{
+				
+				Main.transmissionCountMatrix[srcNode.indexInValidNodes][desNode.indexInValidNodes] ++;
+				Main.transmissionCountMatrix[desNode.indexInValidNodes][srcNode.indexInValidNodes] ++;
+			}
+		}
+		scan.close();
 	}
 
 	private void createSocialGraphMatrix()
