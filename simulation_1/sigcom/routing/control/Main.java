@@ -8,7 +8,7 @@ public class Main
 {
 	public static Node[] validNodes;			//被选节点
 	public static int[][] friendShipMatrix;
-	public static int[][] commonFriends;    //两个节点共同朋友的个数
+	public static int[][] commonFriends;    	//两个节点共同朋友的个数
 	public static int[][] socialGraphMatrix;
 	public static double[] betweeness;
 	public static int[][] similarityMatrix;
@@ -67,13 +67,24 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------TransmissionRouting--------------");
+//		System.out.println("\n------------------TransmissionRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)
+//		{
+//			TransmissionRouting transRouting = new TransmissionRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			transRouting.execute();
+//			transRouting.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
+		
+		System.out.println("\n------------------InterestRouting--------------");
 		clearData();
 		for(int i = 0; i<testTimes; i++)
 		{
-			TransmissionRouting transRouting = new TransmissionRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			transRouting.execute();
-			transRouting.calcPerformance(i);
+			InterestRouting interestRouting = new InterestRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			interestRouting.execute();
+			interestRouting.calcPerformance(i);
 			Main.clearLoad();
 		}
 		showPerformance();

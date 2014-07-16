@@ -172,7 +172,7 @@ public class TransmissionRouting
 		double averageDelay = (double)Main.delayArray[i]/Main.successArray[i];
 		double averageHops = (double)Main.hopArray[i]/Main.successArray[i];
 		double averageForwards = (double)Main.forwardArray[i]/Main.coupleArray[i];
-		System.out.println("\nFriendShipRouting---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
+		System.out.println("\nTransmissionRouting---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
 		System.out.println("路由成功数目 : "+Main.successArray[i]);
 		System.out.println("成功率:"+deliverRatio);
 		System.out.println("平均延时:"+averageDelay);

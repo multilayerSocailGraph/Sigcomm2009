@@ -12,25 +12,25 @@ import sigcom.routing.model.DijkstraPath;
 import sigcom.routing.model.Message;
 import sigcom.routing.model.Node;
 
-public class FriendShipRoutingV4 
+public class InterestRouting 
 {
 	ArrayList<Couple> coupleList = new ArrayList<Couple>();
 	ArrayList<Contact> contactList = new ArrayList<Contact>();
 
-	public FriendShipRoutingV4(int test_startTime, int test_endTime)//初始化messageList和contactList
+	public InterestRouting(int test_startTime, int test_endTime)//初始化messageList和contactList
 	{
 		for(int i = 0; i < Main.validNodes.length; i++)//生成coupleList进行测试
 		{
 			for(int j = 0; j < Main.validNodes.length; j++)
 			{
 				if(i == j)
-					continue; 
+					continue;
 				Couple couple = new Couple(Main.validNodes[i], Main.validNodes[j]);	//node i is the source node and node j is the destination node
 				coupleList.add(couple);
 			}
 		}
 		
-		File f = new File("sigcom2009_Stage2/proximities_sorted.arff");
+		File f = new File("Stage_2/proximities_sorted.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
@@ -111,32 +111,7 @@ public class FriendShipRoutingV4
 					}
 					else
 					{//还没转发到目的节点
-						double simBetUtil_preNode;
-						double simBetUtil_node;
-						if(Main.similarityMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.similarityMatrix[node.indexInValidNodes][desNode.indexInValidNodes] != 0)
-						{
-							double betUtil_preNode = Main.betweeness[preNode.indexInValidNodes] / (Main.betweeness[preNode.indexInValidNodes] + Main.betweeness[node.indexInValidNodes]);
-							double simUtil_preNode = 1.0f * Main.similarityMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] / (Main.similarityMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.similarityMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
-							simBetUtil_preNode = 0.5 * simUtil_preNode + 0.5 * betUtil_preNode;
-						}
-						else
-						{
-							simBetUtil_preNode = 0;
-						}
-						
-						if(Main.betweeness[preNode.indexInValidNodes] + Main.betweeness[node.indexInValidNodes] != 0)
-						{
-							double betUtil_node = Main.betweeness[node.indexInValidNodes] / (Main.betweeness[preNode.indexInValidNodes] + Main.betweeness[node.indexInValidNodes]);
-							double simUtil_node = 1.0f * Main.similarityMatrix[node.indexInValidNodes][desNode.indexInValidNodes] / (Main.similarityMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.similarityMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
-							simBetUtil_node = 0.5 * simUtil_node + 0.5 * betUtil_node;
-						}
-						else
-						{
-							simBetUtil_node = 0;
-						}
-						
-						
-						if(simBetUtil_preNode < simBetUtil_node)
+						if(Main.commonInterestsMatrix[node.indexInValidNodes][desNode.indexInValidNodes] > Main.commonInterestsMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes])	
 						{
 							preNode.msgQueue.getFirst().TTL--;
 							if(preNode.msgQueue.getFirst().TTL == 0)
@@ -170,6 +145,11 @@ public class FriendShipRoutingV4
 		
 	}//execute
 	
+	public void sendMsgToNode(Node preNode, Node node, DijkstraPath path, Couple couple)
+	{
+		
+	}
+	
 	public void calcPerformance(int i)
 	{	
 		for(int w = 0; w<coupleList.size(); w++)
@@ -192,7 +172,7 @@ public class FriendShipRoutingV4
 		double averageDelay = (double)Main.delayArray[i]/Main.successArray[i];
 		double averageHops = (double)Main.hopArray[i]/Main.successArray[i];
 		double averageForwards = (double)Main.forwardArray[i]/Main.coupleArray[i];
-		System.out.println("\nFriendShipV4Routing---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
+		System.out.println("\nInterestRouting---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
 		System.out.println("路由成功数目 : "+Main.successArray[i]);
 		System.out.println("成功率:"+deliverRatio);
 		System.out.println("平均延时:"+averageDelay);
