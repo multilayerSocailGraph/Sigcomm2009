@@ -1,4 +1,4 @@
-package simulation_1.sigcom.test;
+package sigcom.test;
 
 public class Test {
 

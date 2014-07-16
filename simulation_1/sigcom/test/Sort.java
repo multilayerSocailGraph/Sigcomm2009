@@ -1,4 +1,4 @@
-package simulation_1.sigcom.test;
+package sigcom.test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +16,7 @@ public class Sort
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub
-		File f = new File("sigcom2009_Stage1/proximities.arff");
+		File f = new File("Stage_1/interests.arff");
 		Vector<Proximity> list = new Vector<Proximity>();
 		BufferedReader br;
 		
@@ -43,7 +43,7 @@ public class Sort
 		Collections.sort(list,comp);
 		
 		try{
-			File f2 = new File("Stage_2/proximities_sorted.arff");
+			File f2 = new File("Stage_2/interests_sorted.arff");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
 			for(int i= 0; i<list.size(); i++)
 			{
@@ -67,9 +67,9 @@ public class Sort
 
 	static Comparator<Proximity> comp=new Comparator<Proximity>(){
 		public int compare(Proximity hang1,Proximity hang2){
-			if(Integer.parseInt(hang1.n1) <Integer.parseInt(hang2.n1))
+			if(Integer.parseInt(hang1.n2) <Integer.parseInt(hang2.n2))
 				return -1;
-			else if(Integer.parseInt(hang1.n1) >Integer.parseInt(hang2.n1))
+			else if(Integer.parseInt(hang1.n2) >Integer.parseInt(hang2.n2))
 				return 1;
 			else
 				return 0;

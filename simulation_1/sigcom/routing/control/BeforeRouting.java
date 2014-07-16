@@ -1,10 +1,11 @@
-package simulation_1.sigcom.routing.control;
+package sigcom.routing.control;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -13,7 +14,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import simulation_1.sigcom.routing.model.Node;
+import sigcom.routing.model.Node;
 
 
 class BeforeRouting 
@@ -60,13 +61,17 @@ class BeforeRouting
 		System.out.println("start create transmissionCountMatrix...");
 		createtransmissionCountMatrix();
 		System.out.println("create transmissionCountMatrix complete!\n");
+		
+		System.out.println("start create commonInterestsMatrix...");
+		createtcommonInterestsMatrix();
+		System.out.println("create commonInterestsMatrix complete!\n");
 	}
 	
 	public void createValidNodes()
 	{
 		ArrayList<String> array = new ArrayList<String>();
 		
-		File f = new File("sigcom2009_Stage2/ValidNodes.txt");
+		File f = new File("Stage_2/ValidNodes.txt");
 		BufferedReader br = null;
 		try{
 			br = new BufferedReader(new FileReader(f));
@@ -92,6 +97,8 @@ class BeforeRouting
 		
 	}
 	
+	
+	
 	public static int getNodeIndex(String[] nodes, String node) 
 	{
 		int low = 0;
@@ -112,7 +119,7 @@ class BeforeRouting
 	
 	private void createFriendShipMatrix()
 	{
-		File f = new File("sigcom2009_Stage2/friendshipDM.arff");
+		File f = new File("Stage_2/friendshipDM_sorted.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
@@ -145,6 +152,60 @@ class BeforeRouting
 			}
 		}
 		scan.close();
+	}
+	
+	private void createtcommonInterestsMatrix()
+	{
+		Main.commonInterestsMatrix = new int[Main.validNodes.length][Main.validNodes.length];
+		
+		File f = new File("stage_2/interests_sorted.arff");
+		Scanner scan = null;
+		try {
+			scan = new Scanner(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		HashMap<String,Vector<String>> hash = new HashMap<String,Vector<String>>();
+		while (scan.hasNextLine())
+		{
+			String temp = scan.nextLine();
+			
+			StringTokenizer tempTokenizer = new StringTokenizer(temp,",");
+			Node node = Node.findNodeByName(tempTokenizer.nextToken(), Main.validNodes);
+			String groupId = tempTokenizer.nextToken();
+			if(hash.get(groupId) == null)
+			{
+				Vector<String> v = new Vector<String>();
+				v.add(String.valueOf(node.indexInValidNodes));
+				hash.put(groupId, v);
+			}
+			else
+			{
+				Vector<String> v = hash.get(groupId);
+				v.add(String.valueOf(node.indexInValidNodes));
+				hash.remove(groupId);
+				hash.put(groupId, v);
+			}
+		}
+		scan.close();
+		
+		Iterator<String> iterator = hash.keySet().iterator();
+		while (iterator.hasNext())
+		{
+			Vector<String> v = hash.get(iterator.next());
+			for(int i = 0; i<v.size(); i++)
+			{
+				String str1 = v.get(i);
+				for(int j = 0; j<v.size(); j++)
+				{
+					if(i == j)
+						continue;
+					String str2 = v.get(j);
+					Main.commonInterestsMatrix[Integer.parseInt(str1)][Integer.parseInt(str2)]++;
+				}
+			}
+		}
+		
 	}
 	
 	private void createCommonFriendsMatrix()
@@ -188,7 +249,7 @@ class BeforeRouting
 	
 	private void createtransmissionCountMatrix()
 	{
-		File f = new File("stage_1/transmissions.arff");
+		File f = new File("sigcom2009_Stage1/transmissions.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
@@ -236,7 +297,7 @@ class BeforeRouting
 
 	private void createContactCountMatrix()
 	{
-		File f = new File("Stage_1/proximities.arff");
+		File f = new File("Stage_2/proximities_sorted.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);

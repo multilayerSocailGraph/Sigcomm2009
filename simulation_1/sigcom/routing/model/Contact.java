@@ -1,4 +1,4 @@
-package simulation_1.sigcom.routing.model;
+package sigcom.routing.model;
 
 
 public class Contact 

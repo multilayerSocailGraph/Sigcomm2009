@@ -1,7 +1,8 @@
-package simulation_1.sigcom.routing.control;
+package sigcom.routing.control;
 
 import java.text.DecimalFormat;
-import simulation_1.sigcom.routing.model.Node;
+
+import sigcom.routing.model.Node;
   
 public class Main
 {
@@ -13,6 +14,7 @@ public class Main
 	public static int[][] similarityMatrix;
 	public static int[][] contactCountMatrix;
 	public static int[][] transmissionCountMatrix;
+	public static int[][] commonInterestsMatrix;
 	
 	public static int testTimes = BeforeRouting.test_TimeArray.length-1;//进行的测试次数
 	public static int[] coupleArray = new int[testTimes];//某次测试的样例数，样例事先在程序中已设定好，一般在每个路由算法的构造函数中设定

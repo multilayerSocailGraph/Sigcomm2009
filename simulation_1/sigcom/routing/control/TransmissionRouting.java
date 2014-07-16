@@ -1,16 +1,16 @@
-package simulation_1.sigcom.routing.control;
+package sigcom.routing.control;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import simulation_1.sigcom.routing.model.Contact;
-import simulation_1.sigcom.routing.model.Couple;
-import simulation_1.sigcom.routing.model.DijkstraPath;
-import simulation_1.sigcom.routing.model.Message;
-import simulation_1.sigcom.routing.model.Node;
 
+import sigcom.routing.model.Contact;
+import sigcom.routing.model.Couple;
+import sigcom.routing.model.DijkstraPath;
+import sigcom.routing.model.Message;
+import sigcom.routing.model.Node;
 
 public class TransmissionRouting 
 {
@@ -30,7 +30,7 @@ public class TransmissionRouting
 			}
 		}
 		
-		File f = new File("sigcom2009_Stage2/proximities_sorted.arff");
+		File f = new File("Stage_2/proximities_sorted.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
