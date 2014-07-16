@@ -24,16 +24,13 @@ public class DataMining {
 	 * 
 	 ****************************************/
 	private static void processStage1data() {
-		Stage1Process stage1_dataset1 = new Stage1Process("./Stage_1");
-		stage1_dataset1.combineRelationships();
-		System.out.println("Stage 1 Data process is done.");
 		
-		Stage1Data_discretize stage1_dataset2 = new Stage1Data_discretize("./Stage_1");
-		stage1_dataset2.combineRelationships();
+		Stage1Data_discretize stage1_dataset = new Stage1Data_discretize("./st_andrewssassy_Stage1");
+		stage1_dataset.combineRelationships();
 		System.out.println("Stage 1 Data discretize is done.");
 		
 		// Not ready yet
-		//Stage1TemporalFriends stage1_dataset3 = new Stage1TemporalFriends("./Stage_1");
+		//Stage1TemporalFriends stage1_dataset3 = new Stage1TemporalFriends("./st_andrewssassy_Stage1");
 		//stage1_dataset3.combineRelationships();		
 		//System.out.println("Stage 1 Dataset process Temporal Friends is done.");
 	}
@@ -44,31 +41,12 @@ public class DataMining {
 	 * 
 	 * ***************************************/
 	private static void processRawdata() {
-		RawDataProcess raw_datasets = new RawDataProcess("./RawData");
-		// change activity file
-		raw_datasets.activity_processs();
+		RawDataProcess raw_datasets = new RawDataProcess("./st_andrewssassy_RawData");
+		// change and Save dsn file to Stage 1
+		raw_datasets.dsn_processs();
 
-		// Merge friends1 and friends2 file
-		raw_datasets.mergeFriends();
-
-		// Merge interets1 and interets2 file
-		raw_datasets.mergeInterests();
-
-		// Remove redundant informations from files
-		// messages,receptions,transmissions
-		raw_datasets.messagesProce();
-
-		// Change format of participants
-		raw_datasets.participantsProce();
-
-		// Remove users who are not participated
-		raw_datasets.proximityProce();
-
-		// Remove message id
-		raw_datasets.receptionProce();
-
-		// Remove message id and success status
-		raw_datasets.transmissionProce();
+		// Save srsn file to Stage 1
+		raw_datasets.srsn_processs();
 
 		System.out.println("Raw Data process is done.");
 	}

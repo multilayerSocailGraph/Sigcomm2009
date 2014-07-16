@@ -1,6 +1,10 @@
 package St_andrewssassySimulation.st_andrewssassy.main;
 
+<<<<<<< HEAD
 import St_andrewssassySimulation.st_andrewssassy.datamining.DataMining;
+=======
+import st_andrewssassy.datamining.DataMining;
+>>>>>>> ChaoBranch
 
 public class Run {
 
@@ -17,7 +21,6 @@ public class Run {
 		DataMining.dataProcess(dataProcessFlag);
 		
 		// Simulation.comparation();
-
 	}
 
 }
