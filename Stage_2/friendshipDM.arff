@@ -4,8 +4,8 @@
 @attribute bytes {0,1,2}
 @attribute hop_src_user_id numeric
 @attribute hop_dst_user_id numeric
-@attribute src_timestamp numeric
-@attribute friendship {0,1}
+@attribute src_timestamp numeric	describe:The Bluetooth device discovery logs.
+@attribute friendship {0,1};		
 @attribute interest {0,1}
 @attribute timeslot {1,2,3}
 @attribute same_institution {0,1}
