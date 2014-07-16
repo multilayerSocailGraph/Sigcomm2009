@@ -58,7 +58,7 @@ public class Stage1Data_discretize extends PreprocessBase {
 		Instances firstFriendship = new Instances("Initailfriends", atts, 0);
 		// Fill data into new instances
 		double[] vals;
-		for (int i = 1; i < 77; i++) {			
+		for (int i = 1; i < 77; i++) {		
 			for (int j = 1; j < 77; j++) {
 				vals = new double[firstFriendship.numAttributes()];
 				vals[0] = i;

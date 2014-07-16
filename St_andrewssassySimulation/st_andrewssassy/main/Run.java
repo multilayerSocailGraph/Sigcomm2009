@@ -1,6 +1,6 @@
 package st_andrewssassy.main;
 
-import sigcom.datamining.DataMining;
+import st_andrewssassy.datamining.DataMining;
 
 public class Run {
 
@@ -17,7 +17,6 @@ public class Run {
 		DataMining.dataProcess(dataProcessFlag);
 		
 		// Simulation.comparation();
-
 	}
 
 }

@@ -29,8 +29,7 @@ public class PreprocessBase {
 	private void readFilesInFolder() {
 		for (int i = 0; i < filestoread.size(); i++) {
 			try {
-				BufferedReader datafile = this.readDataFile(foldername + "/"
-						+ filestoread.get(i));
+				BufferedReader datafile = this.readDataFile(foldername + "/" + filestoread.get(i));
 				instanceList.add(new Instances(datafile));
 			} catch (IOException e) {
 				e.printStackTrace();
