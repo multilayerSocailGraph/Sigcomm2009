@@ -1,4 +1,4 @@
-package st_andrewssassy.datamining;
+package St_andrewssassySimulation.st_andrewssassy.datamining;
 
 public class DataMining {
 	public static void dataProcess(int dataProcessFlag) {

@@ -1,12 +1,12 @@
-package st_andrewssassy.main;
+package St_andrewssassySimulation.st_andrewssassy.main;
 
 import org.jgrapht.EdgeFactory;
 import org.jgrapht.graph.ClassBasedEdgeFactory;
 
-import sigcom.network.Common;
-import sigcom.network.CommunicateGraph;
-import sigcom.network.Edge;
-import sigcom.network.Vertex;
+import St_andrewssassySimulation.st_andrewssassy.network.Common;
+import St_andrewssassySimulation.st_andrewssassy.network.CommunicateGraph;
+import St_andrewssassySimulation.st_andrewssassy.network.Edge;
+import St_andrewssassySimulation.st_andrewssassy.network.Vertex;
 
 
 public class Simulation {

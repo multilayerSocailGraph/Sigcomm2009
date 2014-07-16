@@ -1,8 +1,8 @@
-package st_andrewssassy.network;
+package St_andrewssassySimulation.st_andrewssassy.network;
 
 import java.util.ArrayList;
 
-import sigcom.datamining.Initial_Phase;
+import St_andrewssassySimulation.st_andrewssassy.datamining.Initial_Phase;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;

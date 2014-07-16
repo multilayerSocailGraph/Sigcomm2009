@@ -1,4 +1,4 @@
-package simulation_1.sigcom.datamining;
+package Sigcom2009Simulation.sigcom.datamining;
 
 public class DataMining {
 	public static void dataProcess(int dataProcessFlag) {

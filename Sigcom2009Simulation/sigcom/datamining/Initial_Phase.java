@@ -1,11 +1,9 @@
-package simulation_1.sigcom.datamining;
+package Sigcom2009Simulation.sigcom.datamining;
 
 import java.util.ArrayList;
-<<<<<<< HEAD:simulation_1/sigcom/datamining/Initial_Phase.java
 
-import simulation_1.sigcom.datamining.RawDataProcess;
-=======
->>>>>>> origin/ChaoBranch:Sigcom2009Simulation/sigcom/datamining/Initial_Phase.java
+import Sigcom2009Simulation.sigcom.datamining.RawDataProcess;
+
 import weka.core.Instances;
 
 public class Initial_Phase {

@@ -1,8 +1,8 @@
-package simulation_1.sigcom.network;
+package Sigcom2009Simulation.sigcom.network;
 
 import java.util.ArrayList;
 
-import simulation_1.sigcom.datamining.Initial_Phase;
+import Sigcom2009Simulation.sigcom.datamining.Initial_Phase;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;

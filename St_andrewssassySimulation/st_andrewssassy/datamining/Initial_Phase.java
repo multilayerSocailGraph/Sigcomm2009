@@ -1,4 +1,4 @@
-package st_andrewssassy.datamining;
+package St_andrewssassySimulation.st_andrewssassy.datamining;
 
 import java.util.ArrayList;
 import weka.core.Instances;

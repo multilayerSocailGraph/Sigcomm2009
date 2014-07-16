@@ -1,6 +1,6 @@
-package simulation_1.sigcom.main;
+package Sigcom2009Simulation.sigcom.main;
 
-import simulation_1.sigcom.datamining.DataMining;
+import Sigcom2009Simulation.sigcom.datamining.DataMining;
 
 public class Run {
 

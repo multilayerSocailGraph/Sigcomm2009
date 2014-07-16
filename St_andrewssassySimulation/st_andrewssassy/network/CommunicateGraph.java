@@ -1,4 +1,4 @@
-package st_andrewssassy.network;
+package St_andrewssassySimulation.st_andrewssassy.network;
 
 import org.jgrapht.EdgeFactory;
 import org.jgrapht.graph.SimpleGraph;

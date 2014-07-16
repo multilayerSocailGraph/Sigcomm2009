@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 # Class files
 *.class
 
-/simulation_1
-=======
-/st_andrewssassy
->>>>>>> origin/ChaoBranch
+/Sigcom2009Simulation
+/St_andrewssassySimulation

@@ -1,4 +1,4 @@
-package st_andrewssassy.network;
+package St_andrewssassySimulation.st_andrewssassy.network;
 
 public class Vertex {
 	

@@ -1,6 +1,6 @@
-package st_andrewssassy.main;
+package St_andrewssassySimulation.st_andrewssassy.main;
 
-import sigcom.datamining.DataMining;
+import St_andrewssassySimulation.st_andrewssassy.datamining.DataMining;
 
 public class Run {
 
