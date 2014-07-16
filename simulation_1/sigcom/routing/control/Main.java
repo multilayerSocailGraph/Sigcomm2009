@@ -1,7 +1,7 @@
-package sigcom.routing.control;
+package simulation_1.sigcom.routing.control;
 
 import java.text.DecimalFormat;
-import sigcom.routing.model.Node;
+import simulation_1.sigcom.routing.model.Node;
   
 public class Main
 {

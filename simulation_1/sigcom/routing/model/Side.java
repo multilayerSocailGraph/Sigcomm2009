@@ -1,4 +1,4 @@
-package sigcom.routing.model;
+package simulation_1.sigcom.routing.model;
 
 class Side
 {

@@ -1,4 +1,4 @@
-package sigcom.test;
+package simulation_1.sigcom.test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

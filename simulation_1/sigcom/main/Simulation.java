@@ -1,12 +1,12 @@
-package sigcom.main;
+package simulation_1.sigcom.main;
 
 import org.jgrapht.EdgeFactory;
 import org.jgrapht.graph.ClassBasedEdgeFactory;
 
-import sigcom.network.Common;
-import sigcom.network.CommunicateGraph;
-import sigcom.network.Edge;
-import sigcom.network.Vertex;
+import simulation_1.sigcom.network.Common;
+import simulation_1.sigcom.network.CommunicateGraph;
+import simulation_1.sigcom.network.Edge;
+import simulation_1.sigcom.network.Vertex;
 
 
 public class Simulation {

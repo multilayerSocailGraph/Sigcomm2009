@@ -1,4 +1,4 @@
-package sigcom.network;
+package simulation_1.sigcom.network;
 
 import org.jgrapht.EdgeFactory;
 import org.jgrapht.graph.SimpleGraph;

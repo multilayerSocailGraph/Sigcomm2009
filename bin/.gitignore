@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-/sigcom
-=======
-/sigcom/
->>>>>>> origin/Chenfei_Branch
+# Class files
+*.class
+
+/simulation_1

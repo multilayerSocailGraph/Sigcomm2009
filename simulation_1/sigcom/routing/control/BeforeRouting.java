@@ -1,4 +1,4 @@
-package sigcom.routing.control;
+package simulation_1.sigcom.routing.control;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import sigcom.routing.model.Node;
+import simulation_1.sigcom.routing.model.Node;
 
 
 class BeforeRouting 

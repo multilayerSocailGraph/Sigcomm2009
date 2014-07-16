@@ -1,4 +1,4 @@
-package sigcom.network;
+package simulation_1.sigcom.network;
 
 import org.jgrapht.graph.DefaultEdge;
 

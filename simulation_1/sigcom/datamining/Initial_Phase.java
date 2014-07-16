@@ -1,9 +1,8 @@
-package sigcom.datamining;
+package simulation_1.sigcom.datamining;
 
 import java.util.ArrayList;
 
-import sigcom.datamining.RawDataProcess;
-import weka.core.Instance;
+import simulation_1.sigcom.datamining.RawDataProcess;
 import weka.core.Instances;
 
 public class Initial_Phase {
