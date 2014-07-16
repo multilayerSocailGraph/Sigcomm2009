@@ -66,7 +66,7 @@ class BeforeRouting
 	{
 		ArrayList<String> array = new ArrayList<String>();
 		
-		File f = new File("Stage_2/ValidNodes.txt");
+		File f = new File("sigcom2009_Stage2/ValidNodes.txt");
 		BufferedReader br = null;
 		try{
 			br = new BufferedReader(new FileReader(f));
@@ -112,7 +112,7 @@ class BeforeRouting
 	
 	private void createFriendShipMatrix()
 	{
-		File f = new File("Stage_2/friendshipDM.arff");
+		File f = new File("sigcom2009_Stage2/friendshipDM.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);

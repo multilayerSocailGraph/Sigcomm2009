@@ -16,7 +16,7 @@ public class Sort
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub
-		File f = new File("Stage_1/proximities.arff");
+		File f = new File("sigcom2009_Stage1/proximities.arff");
 		Vector<Proximity> list = new Vector<Proximity>();
 		BufferedReader br;
 		

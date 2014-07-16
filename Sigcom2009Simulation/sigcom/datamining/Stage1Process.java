@@ -214,7 +214,7 @@ public class Stage1Process extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(firstFriendship);
-			saver.setFile(new File("./Stage_2/Newfriendship0.arff"));
+			saver.setFile(new File("./sigcom2009_Stage2/Newfriendship0.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();

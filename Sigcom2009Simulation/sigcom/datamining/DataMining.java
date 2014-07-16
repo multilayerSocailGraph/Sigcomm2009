@@ -24,11 +24,11 @@ public class DataMining {
 	 * 
 	 ****************************************/
 	private static void processStage1data() {
-		Stage1Process stage1_dataset1 = new Stage1Process("./Stage_1");
+		Stage1Process stage1_dataset1 = new Stage1Process("./sigcom2009_Stage1");
 		stage1_dataset1.combineRelationships();
 		System.out.println("Stage 1 Data process is done.");
 		
-		Stage1Data_discretize stage1_dataset2 = new Stage1Data_discretize("./Stage_1");
+		Stage1Data_discretize stage1_dataset2 = new Stage1Data_discretize("./sigcom2009_Stage1");
 		stage1_dataset2.combineRelationships();
 		System.out.println("Stage 1 Data discretize is done.");
 		
@@ -44,7 +44,7 @@ public class DataMining {
 	 * 
 	 * ***************************************/
 	private static void processRawdata() {
-		RawDataProcess raw_datasets = new RawDataProcess("./RawData");
+		RawDataProcess raw_datasets = new RawDataProcess("./sigcom2009_RawData");
 		// change activity file
 		raw_datasets.activity_processs();
 

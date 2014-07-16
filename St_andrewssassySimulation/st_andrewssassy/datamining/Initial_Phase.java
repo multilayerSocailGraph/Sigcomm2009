@@ -11,7 +11,7 @@ public class Initial_Phase {
 		 * Prepare data
 		 * 
 		 * ***************************************/
-		RawDataProcess raw_datasets = new RawDataProcess("./RawData");
+		RawDataProcess raw_datasets = new RawDataProcess("./st_andrewssassy_RawData");
 		return raw_datasets.instanceList;
 	}
 	

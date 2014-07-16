@@ -56,7 +56,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(activities);
-			saver.setFile(new File("./stage_1/activity.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/activity.arff"));
 			saver.writeBatch();
 
 		} catch (Exception e) {
@@ -89,7 +89,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(friends1);			
-			saver.setFile(new File("./stage_1/friends.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/friends.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,7 +121,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(interests1);
-			saver.setFile(new File("./stage_1/interests.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/interests.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,7 +154,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(messages);			
-			saver.setFile(new File("./stage_1/messages.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/messages.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -203,7 +203,7 @@ public class RawDataProcess extends PreprocessBase {
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(participants);
 		try {
-			saver.setFile(new File("./stage_1/participants.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/participants.arff"));
 			saver.writeBatch();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -212,7 +212,7 @@ public class RawDataProcess extends PreprocessBase {
 		ArffSaver saver2 = new ArffSaver();
 		saver2.setInstances(newparticipants);
 		try {
-			saver2.setFile(new File("./stage_1/newparticipants.arff"));
+			saver2.setFile(new File("./sigcom2009_Stage1/newparticipants.arff"));
 			saver2.writeBatch();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -256,7 +256,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(proximities);
-			saver.setFile(new File("./stage_1/proximities.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/proximities.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -296,7 +296,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(receptions);
-			saver.setFile(new File("./stage_1/receptions.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/receptions.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -342,7 +342,7 @@ public class RawDataProcess extends PreprocessBase {
 			// Save modified data with discretized duration attribute
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(transmissions);
-			saver.setFile(new File("./stage_1/transmissions.arff"));
+			saver.setFile(new File("./sigcom2009_Stage1/transmissions.arff"));
 			saver.writeBatch();
 		} catch (Exception e) {
 			e.printStackTrace();

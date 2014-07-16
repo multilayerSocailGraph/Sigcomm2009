@@ -29,7 +29,7 @@ public class EpidemicRouting
 			}
 		}
 		
-		File f = new File("Stage_2/proximities_sorted.arff");
+		File f = new File("sigcom2009_Stage2/proximities_sorted.arff");
 		Scanner scan = null;
 		try {
 			scan = new Scanner(f);
