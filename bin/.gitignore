@@ -1,20 +1,3 @@
 # Class files
 *.class
 
-/.classpath
-/.gitattributes
-/.gitignore
-/.project
-/.settings
-/Readme.txt
-/Sigcom2009Simulation
-/St_andrewssassySimulation
-/Stage_2
-/files
-/sigcom2009_RawData
-/sigcom2009_Stage1
-/sigcom2009_Stage2
-/simulation_1
-/st_andrewssassy_RawData
-/st_andrewssassy_Stage1
-/st_andrewssassy_Stage2
