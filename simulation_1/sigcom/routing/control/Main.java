@@ -78,13 +78,24 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------InterestRouting--------------");
+//		System.out.println("\n------------------InterestRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)
+//		{
+//			InterestRouting interestRouting = new InterestRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			interestRouting.execute();
+//			interestRouting.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
+		
+		System.out.println("\n------------------Greedy-Total--------------");
 		clearData();
 		for(int i = 0; i<testTimes; i++)
 		{
-			InterestRouting interestRouting = new InterestRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			interestRouting.execute();
-			interestRouting.calcPerformance(i);
+			GreedyTotal greedyTotal = new GreedyTotal(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			greedyTotal.execute();
+			greedyTotal.calcPerformance(i);
 			Main.clearLoad();
 		}
 		showPerformance();

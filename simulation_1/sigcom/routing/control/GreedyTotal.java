@@ -12,20 +12,19 @@ import sigcom.routing.model.DijkstraPath;
 import sigcom.routing.model.Message;
 import sigcom.routing.model.Node;
 
-
-public class FriendShipRouting 
+public class GreedyTotal 
 {
 	ArrayList<Couple> coupleList = new ArrayList<Couple>();
 	ArrayList<Contact> contactList = new ArrayList<Contact>();
 
-	public FriendShipRouting(int test_startTime, int test_endTime)//初始化messageList和contactList
+	public GreedyTotal(int test_startTime, int test_endTime)//初始化messageList和contactList
 	{
 		for(int i = 0; i < Main.validNodes.length; i++)//生成coupleList进行测试
 		{
 			for(int j = 0; j < Main.validNodes.length; j++)
 			{
 				if(i == j)
-					continue;
+					continue; 
 				Couple couple = new Couple(Main.validNodes[i], Main.validNodes[j]);	//node i is the source node and node j is the destination node
 				coupleList.add(couple);
 			}
@@ -112,28 +111,7 @@ public class FriendShipRouting
 					}
 					else
 					{//还没转发到目的节点
-						/*
-						 * version 1:
-						 * 如果当前节点所遇到的节点与目的节点是朋友关系时，当前节点就把数据报转发给遇到的节点，否则等待...
-						 */
-//						double friendShip = 1.0f*Main.friendShipMatrix[node.indexInValidNodes][desNode.indexInValidNodes];
-//						if(friendShip > 0)
-						
-						/*
-						 * version 2:
-						 * 如果当前节点所遇到节点与目的节点的共同朋友的个数 比 它与目的节点共同朋友的个数多的时候，那么当前节点就把数据报转发给遇到的节点，否则等待...
-						 */
-//						if(Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes] > Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes])
-						/*
-						 * version 3:
-						 * combine version1 and version 2.
-						 * case 1:当前节点所遇到的节点与目的节点是朋友关系且当前节点与目的节点非朋友关系时，当前节点就把数据报转发给遇到的节点
-						 * case 2:当前节点所遇到的节点与目的节点非朋友且当前节点与目的节点是朋友关系时，当前节点不转发报文，等待下次相遇在做判断
-						 * case 3:(当前节点所遇到的节点与目的节点是朋友关系且当前节点与目的节点也是朋友关系)或者(当前节点所遇到的节点与目的节点非朋友关系且当前节点与目的节点也非朋友关系)，那么使用version 2的策略进行路由
-						 */
-						double friendShip_preNode_desNode = 1.0f*Main.friendShipMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes];
-						double friendShip_node_desNode = 1.0f*Main.friendShipMatrix[node.indexInValidNodes][desNode.indexInValidNodes];
-						if(friendShip_node_desNode == 1 && friendShip_preNode_desNode == 0)	
+						if(Main.contactCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] < Main.contactCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes])
 						{
 							preNode.msgQueue.getFirst().TTL--;
 							if(preNode.msgQueue.getFirst().TTL == 0)
@@ -149,27 +127,6 @@ public class FriendShipRouting
 								Main.load[preNode.indexInValidNodes]++;
 							}
 						}
-						else if((friendShip_node_desNode == 1 && friendShip_preNode_desNode == 1) || (friendShip_node_desNode == 0 && friendShip_preNode_desNode == 0))
-						{
-							if(Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes] > Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes])
-							{
-								preNode.msgQueue.getFirst().TTL--;
-								if(preNode.msgQueue.getFirst().TTL == 0)
-								{
-									break;//数据包被丢弃，转发是失败的
-								}
-								else
-								{
-									preNode.fowardMessageToAnotherNode(node, 1);
-									path.addSide(preNode.name, node.name, 1);
-									couple.fowardTimes++;
-									Main.load[node.indexInValidNodes]++;
-									Main.load[preNode.indexInValidNodes]++;
-								}
-							}
-						}
-						else
-							;//不转发，等待下次相遇
 							
 					}//挑选中继进行转发
 				}
@@ -187,11 +144,6 @@ public class FriendShipRouting
 		}//遍历coupleList，执行每一次转发
 		
 	}//execute
-	
-	public void sendMsgToNode(Node preNode, Node node, DijkstraPath path, Couple couple)
-	{
-		
-	}
 	
 	public void calcPerformance(int i)
 	{	
@@ -215,7 +167,7 @@ public class FriendShipRouting
 		double averageDelay = (double)Main.delayArray[i]/Main.successArray[i];
 		double averageHops = (double)Main.hopArray[i]/Main.successArray[i];
 		double averageForwards = (double)Main.forwardArray[i]/Main.coupleArray[i];
-		System.out.println("\nFriendShipRouting---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
+		System.out.println("\nFriendShipV4Routing---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
 		System.out.println("路由成功数目 : "+Main.successArray[i]);
 		System.out.println("成功率:"+deliverRatio);
 		System.out.println("平均延时:"+averageDelay);
