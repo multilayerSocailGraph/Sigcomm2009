@@ -46,6 +46,14 @@ class BeforeRouting
 		createContactCountMatrix();
 		System.out.println("create contactCountMatrix complete!\n");
 		
+		System.out.println("start create transmissionCountMatrix...");
+		createtransmissionCountMatrix();
+		System.out.println("create transmissionCountMatrix complete!\n");
+		
+		System.out.println("start create commonInterestsMatrix...");
+		createtcommonInterestsMatrix();
+		System.out.println("create commonInterestsMatrix complete!\n");
+		
 		System.out.println("start create socialGraphMatrix...");
 		createSocialGraphMatrix();
 		System.out.println("create socialGraphMatrix complete!\n");
@@ -57,14 +65,6 @@ class BeforeRouting
 		System.out.println("start create similarityMatrix...");
 		createSimilarityMatrix();
 		System.out.println("create similarityMatrix complete!\n");
-		
-		System.out.println("start create transmissionCountMatrix...");
-		createtransmissionCountMatrix();
-		System.out.println("create transmissionCountMatrix complete!\n");
-		
-		System.out.println("start create commonInterestsMatrix...");
-		createtcommonInterestsMatrix();
-		System.out.println("create commonInterestsMatrix complete!\n");
 	}
 	
 	public void createValidNodes()
@@ -288,8 +288,9 @@ class BeforeRouting
 		{
 			for(int j = i; j < Main.validNodes.length; j++) 
 			{
-				//if(Main.friendShipMatrix[i][j] == 1 || Main.commonFriends[i][j] >= 1)
-				if(Main.contactCountMatrix[i][j] >= 1)
+				if(Main.friendShipMatrix[i][j] == 1 || Main.commonFriends[i][j] >= 2)
+				//if(Main.contactCountMatrix[i][j] >= 1)
+				//if(Main.commonInterestsMatrix[i][j] >= 2)
 					Main.socialGraphMatrix[i][j] = Main.socialGraphMatrix[j][i] = 1;
 			}
 		}
