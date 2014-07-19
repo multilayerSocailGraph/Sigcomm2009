@@ -288,9 +288,10 @@ class BeforeRouting
 		{
 			for(int j = i; j < Main.validNodes.length; j++) 
 			{
-				if(Main.friendShipMatrix[i][j] == 1 || Main.commonFriends[i][j] >= 2)
-				//if(Main.contactCountMatrix[i][j] >= 1)
+				//if(Main.friendShipMatrix[i][j] == 1 || Main.commonFriends[i][j] >= 2)
+				if(Main.contactCountMatrix[i][j] >= 4)
 				//if(Main.commonInterestsMatrix[i][j] >= 2)
+				//if(Main.transmissionCountMatrix[i][j] >= 4)
 					Main.socialGraphMatrix[i][j] = Main.socialGraphMatrix[j][i] = 1;
 			}
 		}
