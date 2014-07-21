@@ -12,12 +12,12 @@ import sigcom.routing.model.DijkstraPath;
 import sigcom.routing.model.Message;
 import sigcom.routing.model.Node;
 
-public class LayerByLayerRouting 
+public class FIPTRouting 
 {
 	ArrayList<Couple> coupleList = new ArrayList<Couple>();
 	ArrayList<Contact> contactList = new ArrayList<Contact>();
 
-	public LayerByLayerRouting(int test_startTime, int test_endTime)//初始化messageList和contactList
+	public FIPTRouting(int test_startTime, int test_endTime)//初始化messageList和contactList
 	{
 		for(int i = 0; i < Main.validNodes.length; i++)//生成coupleList进行测试
 		{
@@ -148,26 +148,22 @@ public class LayerByLayerRouting
 	public boolean isForward(Node preNode, Node node, Node desNode)
 	{
 		boolean isForward = false;
-		int counter = 0;
+
+		double friendsUtil_preNode = (double)Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double friendsUtil_node = (double)Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double interestUtil_preNode = (double)Main.commonInterestsMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.commonInterestsMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.commonInterestsMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double interestUtil_node = (double)Main.commonInterestsMatrix[node.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.commonInterestsMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.commonInterestsMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double proximityUtil_preNode = (double)Main.contactCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.contactCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.contactCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double proximityUtil_node = (double)Main.contactCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.contactCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.contactCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double transmissionUtil_preNode = (double)Main.transmissionCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.transmissionCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.transmissionCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
+		double transmissionUtil_node = (double)Main.transmissionCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes] / (double)(Main.transmissionCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes] + Main.transmissionCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes]);
 		
-		if(Main.friendShipMatrix[node.indexInValidNodes][desNode.indexInValidNodes] == 1 || Main.commonFriends[node.indexInValidNodes][desNode.indexInValidNodes] >= Main.commonFriends[preNode.indexInValidNodes][desNode.indexInValidNodes])
-		{
-			counter++;
-		}
-		if(Main.commonInterestsMatrix[node.indexInValidNodes][desNode.indexInValidNodes] >= Main.commonInterestsMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes])
-		{
-			counter++;
-		}
-		if(Main.betweeness[node.indexInValidNodes] >= Main.betweeness[preNode.indexInValidNodes])
-		{
-			counter++;
-		}
-		if(Main.transmissionCountMatrix[node.indexInValidNodes][desNode.indexInValidNodes] >= Main.transmissionCountMatrix[preNode.indexInValidNodes][desNode.indexInValidNodes])
-		{
-			counter++;
-		}
-		if(counter >= 4)
+		double fipt_preNode = 0.508*friendsUtil_preNode + 0.466*interestUtil_preNode + 0.497*proximityUtil_preNode + 0.461*transmissionUtil_preNode;
+		double fipt_node = 0.508*friendsUtil_node + 0.466*interestUtil_node + 0.497*proximityUtil_node + 0.461*transmissionUtil_node;
+		
+		if(fipt_node >= fipt_preNode)
 			isForward = true;
+		
 		return isForward;
 	}
 	
@@ -193,7 +189,7 @@ public class LayerByLayerRouting
 		double averageDelay = (double)Main.delayArray[i]/Main.successArray[i];
 		double averageHops = (double)Main.hopArray[i]/Main.successArray[i];
 		double averageForwards = (double)Main.forwardArray[i]/Main.coupleArray[i];
-		System.out.println("\nLayerByLayerRouting---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
+		System.out.println("\nFIPTRouting---第"+(i+1)+"次测试总数:"+Main.coupleArray[i]);
 		System.out.println("路由成功数目 : "+Main.successArray[i]);
 		System.out.println("成功率:"+deliverRatio);
 		System.out.println("平均延时:"+averageDelay);

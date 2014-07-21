@@ -99,13 +99,24 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------LayerByLayerRouting--------------");
+//		System.out.println("\n------------------LayerByLayerRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)
+//		{
+//			LayerByLayerRouting lbl = new LayerByLayerRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			lbl.execute();
+//			lbl.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
+		
+		System.out.println("\n------------------FIPTRouting--------------");
 		clearData();
 		for(int i = 0; i<testTimes; i++)
 		{
-			LayerByLayerRouting lbl = new LayerByLayerRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			lbl.execute();
-			lbl.calcPerformance(i);
+			FIPTRouting fiptRouting = new FIPTRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			fiptRouting.execute();
+			fiptRouting.calcPerformance(i);
 			Main.clearLoad();
 		}
 		showPerformance();
