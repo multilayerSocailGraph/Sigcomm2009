@@ -1,7 +1,6 @@
 package sigcom.routing.control;
 
 import java.text.DecimalFormat;
-
 import sigcom.routing.model.Node;
   
 public class Main
@@ -45,16 +44,16 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------FriendShipRoutingV4--------------");
-		clearData();
-		for(int i = 0; i<testTimes; i++)//FriendShipRouting
-		{
-			FriendShipRoutingV4 friendshipRoutingV4 = new FriendShipRoutingV4(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			friendshipRoutingV4.execute();
-			friendshipRoutingV4.calcPerformance(i);
-			Main.clearLoad();
-		}
-		showPerformance();
+//		System.out.println("\n------------------FriendShipRoutingV4--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)//FriendShipRouting
+//		{
+//			FriendShipRoutingV4 friendshipRoutingV4 = new FriendShipRoutingV4(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			friendshipRoutingV4.execute();
+//			friendshipRoutingV4.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
 		
 //		System.out.println("\n------------------EpidemicRouting--------------");
 //		clearData();
@@ -100,6 +99,16 @@ public class Main
 //		}
 //		showPerformance();
 		
+		System.out.println("\n------------------LayerByLayerRouting--------------");
+		clearData();
+		for(int i = 0; i<testTimes; i++)
+		{
+			LayerByLayerRouting lbl = new LayerByLayerRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			lbl.execute();
+			lbl.calcPerformance(i);
+			Main.clearLoad();
+		}
+		showPerformance();
 	}
 	
 	public static void showPerformance()

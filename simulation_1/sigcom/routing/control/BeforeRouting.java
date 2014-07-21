@@ -16,7 +16,6 @@ import java.util.Vector;
 
 import sigcom.routing.model.Node;
 
-
 class BeforeRouting 
 {
 	int train_Start_Time = 0;	//训练的开始时间(sortedContact.dat文件中节点开始发送数据的时间)
@@ -289,7 +288,7 @@ class BeforeRouting
 			for(int j = i; j < Main.validNodes.length; j++) 
 			{
 				//if(Main.friendShipMatrix[i][j] == 1 || Main.commonFriends[i][j] >= 2)
-				if(Main.contactCountMatrix[i][j] >= 4)
+				if(Main.contactCountMatrix[i][j] >= 3)
 				//if(Main.commonInterestsMatrix[i][j] >= 2)
 				//if(Main.transmissionCountMatrix[i][j] >= 4)
 					Main.socialGraphMatrix[i][j] = Main.socialGraphMatrix[j][i] = 1;
