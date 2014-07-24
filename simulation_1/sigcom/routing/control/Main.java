@@ -1,10 +1,6 @@
 package sigcom.routing.control;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.text.DecimalFormat;
-
 import sigcom.routing.model.Node;
   
 public class Main
@@ -150,35 +146,35 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------Greedy-Total--------------");
-		clearData();
-		for(int i = 0; i<testTimes; i++)
-		{
-			GreedyTotal greedyTotal = new GreedyTotal(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			greedyTotal.execute();
-			greedyTotal.calcPerformance(i);
-			Main.clearLoad();
-			if(i == 10)
-			{
-				try{
-					File f = new File("Stage_2/proximity_failed.txt");
-					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-					for(int j = 0; j<greedyTotal.coupleList.size(); j++)
-					{
-						if(greedyTotal.coupleList.get(j).success == false)
-						{
-							bw.write(greedyTotal.coupleList.get(j).srcNode.name+","+greedyTotal.coupleList.get(j).desNode.name+"\n");
-						}
-					}
-					bw.close();
-					System.out.println("失败信息统计成功！");
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				
-			}//统计测试时间为十小时时的失败的couple对
-		}
-		showPerformance();
+//		System.out.println("\n------------------Greedy-Total--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)
+//		{
+//			GreedyTotal greedyTotal = new GreedyTotal(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			greedyTotal.execute();
+//			greedyTotal.calcPerformance(i);
+//			Main.clearLoad();
+//			if(i == 10)
+//			{
+//				try{
+//					File f = new File("Stage_2/proximity_failed.txt");
+//					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+//					for(int j = 0; j<greedyTotal.coupleList.size(); j++)
+//					{
+//						if(greedyTotal.coupleList.get(j).success == false)
+//						{
+//							bw.write(greedyTotal.coupleList.get(j).srcNode.name+","+greedyTotal.coupleList.get(j).desNode.name+"\n");
+//						}
+//					}
+//					bw.close();
+//					System.out.println("失败信息统计成功！");
+//				}catch(Exception e){
+//					e.printStackTrace();
+//				}
+//				
+//			}//统计测试时间为十小时时的失败的couple对
+//		}
+//		showPerformance();
 		
 //		System.out.println("\n------------------LayerByLayerRouting--------------");
 //		clearData();
@@ -201,6 +197,17 @@ public class Main
 //			Main.clearLoad();
 //		}
 //		showPerformance();
+		
+		System.out.println("\n------------------AvoidFailingRouting--------------");
+		clearData();
+		for(int i = 0; i<testTimes; i++)
+		{
+			AvoidFailingRouting avoidFailingRouting = new AvoidFailingRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			avoidFailingRouting.execute();
+			avoidFailingRouting.calcPerformance(i);
+			Main.clearLoad();
+		}
+		showPerformance();
 	}
 	
 	public static void showPerformance()
