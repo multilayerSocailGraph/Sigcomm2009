@@ -1,6 +1,10 @@
 package sigcom.routing.control;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.text.DecimalFormat;
+
 import sigcom.routing.model.Node;
   
 public class Main
@@ -41,6 +45,26 @@ public class Main
 //			friendshipRouting.execute();
 //			friendshipRouting.calcPerformance(i);
 //			Main.clearLoad();
+//			if(i == 10)
+//			{
+//				try{
+//					File f = new File("Stage_2/friendship_failed.txt");
+//					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+//					for(int j = 0; j<friendshipRouting.coupleList.size(); j++)
+//					{
+//						if(friendshipRouting.coupleList.get(j).success == false)
+//						{
+//							bw.write(friendshipRouting.coupleList.get(j).srcNode.name+","+friendshipRouting.coupleList.get(j).desNode.name+"\n");
+//						}
+//					}
+//					bw.close();
+//					System.out.println("失败信息统计成功！");
+//				}catch(Exception e){
+//					e.printStackTrace();
+//				}
+//				
+//			}//统计测试时间为十小时时的失败的couple对
+//			
 //		}
 //		showPerformance();
 		
@@ -74,6 +98,25 @@ public class Main
 //			transRouting.execute();
 //			transRouting.calcPerformance(i);
 //			Main.clearLoad();
+//			if(i == 10)
+//			{
+//				try{
+//					File f = new File("Stage_2/transmission_failed.txt");
+//					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+//					for(int j = 0; j<transRouting.coupleList.size(); j++)
+//					{
+//						if(transRouting.coupleList.get(j).success == false)
+//						{
+//							bw.write(transRouting.coupleList.get(j).srcNode.name+","+transRouting.coupleList.get(j).desNode.name+"\n");
+//						}
+//					}
+//					bw.close();
+//					System.out.println("失败信息统计成功！");
+//				}catch(Exception e){
+//					e.printStackTrace();
+//				}
+//				
+//			}//统计测试时间为十小时时的失败的couple对
 //		}
 //		showPerformance();
 		
@@ -85,19 +128,57 @@ public class Main
 //			interestRouting.execute();
 //			interestRouting.calcPerformance(i);
 //			Main.clearLoad();
+//			if(i == 10)
+//			{
+//				try{
+//					File f = new File("Stage_2/interest_failed.txt");
+//					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+//					for(int j = 0; j<interestRouting.coupleList.size(); j++)
+//					{
+//						if(interestRouting.coupleList.get(j).success == false)
+//						{
+//							bw.write(interestRouting.coupleList.get(j).srcNode.name+","+interestRouting.coupleList.get(j).desNode.name+"\n");
+//						}
+//					}
+//					bw.close();
+//					System.out.println("失败信息统计成功！");
+//				}catch(Exception e){
+//					e.printStackTrace();
+//				}
+//				
+//			}//统计测试时间为十小时时的失败的couple对
 //		}
 //		showPerformance();
 		
-//		System.out.println("\n------------------Greedy-Total--------------");
-//		clearData();
-//		for(int i = 0; i<testTimes; i++)
-//		{
-//			GreedyTotal greedyTotal = new GreedyTotal(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-//			greedyTotal.execute();
-//			greedyTotal.calcPerformance(i);
-//			Main.clearLoad();
-//		}
-//		showPerformance();
+		System.out.println("\n------------------Greedy-Total--------------");
+		clearData();
+		for(int i = 0; i<testTimes; i++)
+		{
+			GreedyTotal greedyTotal = new GreedyTotal(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+			greedyTotal.execute();
+			greedyTotal.calcPerformance(i);
+			Main.clearLoad();
+			if(i == 10)
+			{
+				try{
+					File f = new File("Stage_2/proximity_failed.txt");
+					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+					for(int j = 0; j<greedyTotal.coupleList.size(); j++)
+					{
+						if(greedyTotal.coupleList.get(j).success == false)
+						{
+							bw.write(greedyTotal.coupleList.get(j).srcNode.name+","+greedyTotal.coupleList.get(j).desNode.name+"\n");
+						}
+					}
+					bw.close();
+					System.out.println("失败信息统计成功！");
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+			}//统计测试时间为十小时时的失败的couple对
+		}
+		showPerformance();
 		
 //		System.out.println("\n------------------LayerByLayerRouting--------------");
 //		clearData();
@@ -110,16 +191,16 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------FIPTRouting--------------");
-		clearData();
-		for(int i = 0; i<testTimes; i++)
-		{
-			FIPTRouting fiptRouting = new FIPTRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			fiptRouting.execute();
-			fiptRouting.calcPerformance(i);
-			Main.clearLoad();
-		}
-		showPerformance();
+//		System.out.println("\n------------------FIPTRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)
+//		{
+//			FIPTRouting fiptRouting = new FIPTRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			fiptRouting.execute();
+//			fiptRouting.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
 	}
 	
 	public static void showPerformance()
