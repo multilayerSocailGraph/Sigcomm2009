@@ -10,6 +10,7 @@ public class Main
 	public static int[][] commonFriends;    	//两个节点共同朋友的个数
 	public static int[][] socialGraphMatrix;
 	public static double[] betweeness;
+	public static int[] degree;
 	public static int[][] similarityMatrix;
 	public static int[][] contactCountMatrix;
 	public static int[][] transmissionCountMatrix;
@@ -198,17 +199,30 @@ public class Main
 //		}
 //		showPerformance();
 		
-		System.out.println("\n------------------AvoidFailingRouting--------------");
-		clearData();
-		for(int i = 0; i<testTimes; i++)
-		{
-			AvoidFailingRouting avoidFailingRouting = new AvoidFailingRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-			avoidFailingRouting.execute();
-			avoidFailingRouting.calcPerformance(i);
-			Main.clearLoad();
-		}
-		showPerformance();
+//		System.out.println("\n------------------AvoidFailingRouting--------------");
+//		clearData();
+//		for(int i = 0; i<testTimes; i++)
+//		{
+//			AvoidFailingRouting avoidFailingRouting = new AvoidFailingRouting(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//			avoidFailingRouting.execute();
+//			avoidFailingRouting.calcPerformance(i);
+//			Main.clearLoad();
+//		}
+//		showPerformance();
+//	}
+	
+	System.out.println("\n------------------MLSOR--------------");
+	clearData();
+	for(int i = 0; i<testTimes; i++)
+	{
+		MLSOR mlsor = new MLSOR(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+		mlsor.execute();
+		mlsor.calcPerformance(i);
+		Main.clearLoad();
 	}
+	showPerformance();
+
+}
 	
 	public static void showPerformance()
 	{

@@ -57,6 +57,10 @@ class BeforeRouting
 		createSocialGraphMatrix();
 		System.out.println("create socialGraphMatrix complete!\n");
 		
+		System.out.println("start create degreeMatrix...");
+		createDegreeMatrix();
+		System.out.println("create degreeMatrix complete!\n");
+		
 		System.out.println("start create betweenessArray...");
 		createBetweenessArray();
 		System.out.println("create betweenessArray complete!\n");
@@ -244,6 +248,19 @@ class BeforeRouting
 			}
 		}
 
+	}
+	
+	private void createDegreeMatrix()
+	{
+		Main.degree = new int[Main.validNodes.length];
+		for(int i = 0; i < Main.validNodes.length; i++)
+		{
+			for(int j = 0; j < Main.validNodes.length; j++)
+			{
+				if(Main.socialGraphMatrix[i][j] == 1)
+					Main.degree[i]++;
+			}
+		}
 	}
 	
 	private void createtransmissionCountMatrix()
