@@ -2,7 +2,8 @@ package sigcom.routing.control;
 
 import java.text.DecimalFormat;
 import sigcom.routing.model.Node;
-  
+
+
 public class Main
 {
 	public static Node[] validNodes;			//被选节点
@@ -15,7 +16,6 @@ public class Main
 	public static int[][] contactCountMatrix;
 	public static int[][] transmissionCountMatrix;
 	public static int[][] commonInterestsMatrix;
-	
 	public static int testTimes = BeforeRouting.test_TimeArray.length-1;//进行的测试次数
 	public static int[] coupleArray = new int[testTimes];//某次测试的样例数，样例事先在程序中已设定好，一般在每个路由算法的构造函数中设定
 	public static int[] successArray = new int[testTimes];//某次测试最终交付成功样例的数目
@@ -34,6 +34,28 @@ public class Main
 			
 		Main.load = new int[Main.validNodes.length];
 		
+		System.out.println("\n------------------EpidemicCountTest--------------");
+		clearData();
+		for(int i = 0; i<76; i++)//FriendShipRouting
+		{
+			EpidemicCountTest epi = new EpidemicCountTest(80000, 94400, i);
+			epi.execute();
+			EpidemicCountTest.nodeMsgCount[i] = 0;
+			System.out.print("第"+(i+1)+"号节点作为src:");
+			for(int j = 0; j<EpidemicCountTest.nodeMsgCount.length; j++)
+			{
+				System.out.print(EpidemicCountTest.nodeMsgCount[j]+",");
+			}
+			for(int u = 0; u<EpidemicCountTest.nodeMsgCount.length; u++)
+			{
+				EpidemicCountTest.nodeMsgCount[u] = 0;
+			}
+			System.out.println("");
+			//epi.calcPerformance(i);
+			Main.clearLoad();
+		}
+		//showPerformance();
+		
 //		System.out.println("\n------------------FriendShipRouting--------------");
 //		clearData();
 //		for(int i = 0; i<testTimes; i++)//FriendShipRouting
@@ -43,7 +65,7 @@ public class Main
 //			friendshipRouting.calcPerformance(i);
 //			Main.clearLoad();
 //			if(i == 10)
-//			{
+//		{
 //				try{
 //					File f = new File("Stage_2/friendship_failed.txt");
 //					BufferedWriter bw = new BufferedWriter(new FileWriter(f));
@@ -211,16 +233,16 @@ public class Main
 //		showPerformance();
 //	}
 	
-	System.out.println("\n------------------MLSOR--------------");
-	clearData();
-	for(int i = 0; i<testTimes; i++)
-	{
-		MLSOR mlsor = new MLSOR(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
-		mlsor.execute();
-		mlsor.calcPerformance(i);
-		Main.clearLoad();
-	}
-	showPerformance();
+//	System.out.println("\n------------------MLSOR--------------");
+//	clearData();
+//	for(int i = 0; i<testTimes; i++)
+//	{
+//		MLSOR mlsor = new MLSOR(BeforeRouting.test_TimeArray[0], BeforeRouting.test_TimeArray[i+1]);
+//		mlsor.execute();
+//		mlsor.calcPerformance(i);
+//		Main.clearLoad();
+//	}
+//	showPerformance();
 
 }
 	

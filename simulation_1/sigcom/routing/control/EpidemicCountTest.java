@@ -11,23 +11,27 @@ import sigcom.routing.model.DijkstraPath;
 import sigcom.routing.model.Message;
 import sigcom.routing.model.Node;
 
-public class EpidemicRouting 
+public class EpidemicCountTest 
 {
+	public int loopFlag = -1;
+	public static int[] nodeMsgCount = new int[76];
+	
 	ArrayList<Couple> coupleList = new ArrayList<Couple>();
 	ArrayList<Contact> contactList = new ArrayList<Contact>();
 
-	public EpidemicRouting(int test_startTime, int test_endTime)//初始化messageList和contactList
+	public EpidemicCountTest(int test_startTime, int test_endTime, int flag)//初始化messageList和contactList
 	{
-		for(int i = 0; i < Main.validNodes.length; i++)//生成一些msg存入messageList进行测试
+		this.loopFlag = flag;
+		
+		for(int i = 0; i<nodeMsgCount.length; i++)
 		{
-			for(int j = 0; j < Main.validNodes.length; j++)
-			{
-				if(i == j)
-					continue;
-				Couple couple = new Couple(Main.validNodes[i], Main.validNodes[j]);	//node i is the source node and node j is the destination node
-				coupleList.add(couple);
-			}
+			nodeMsgCount[i] = 0;
 		}
+		
+		Node srcNode = Main.validNodes[flag];
+		Node desNode = new Node("-1");
+		Couple couple = new Couple(srcNode, desNode);
+		coupleList.add(couple);
 		
 		File f = new File("Stage_2/proximities_sorted.arff");
 		Scanner scan = null;
@@ -93,8 +97,19 @@ public class EpidemicRouting
 					preNode = secondNodeInContact;
 					node = firstNodeInContact;
 				}
+				else if(secondNodeInContact.msgQueue.size() > 0 && firstNodeInContact.msgQueue.size() > 0)
+				{
+					EpidemicCountTest.nodeMsgCount[firstNodeInContact.indexInValidNodes]++;
+					EpidemicCountTest.nodeMsgCount[secondNodeInContact.indexInValidNodes]++;
+//					System.out.println(contactList.get(j).startTime+","+contactList.get(j).firstNode.name+","+contactList.get(j).secondNode.name);
+//					System.out.println("***给"+firstNodeInContact.name+"节点计数器加一");
+//					System.out.println("***给"+secondNodeInContact.name+"节点计数器加一");
+					continue;
+				}
 				if(preNode!=null && node!=null && node.msgQueue.size()==0)
 				{
+//					System.out.println(contactList.get(j).startTime+","+contactList.get(j).firstNode.name+","+contactList.get(j).secondNode.name);
+//					System.out.println("给"+node.name+"节点计数器加一");
 					if(node.name.equals(desNode.name))
 					{//如果转发到了目的节点
 						preNode.msgQueue.getFirst().TTL--;
@@ -109,14 +124,15 @@ public class EpidemicRouting
 					}
 					else
 					{//还没转发到目的节点
-						preNode.msgQueue.getFirst().TTL--;
-						if(preNode.msgQueue.getFirst().TTL == 0)
+						//preNode.msgQueue.getFirst().TTL--;
+//						if(preNode.msgQueue.getFirst().TTL == 0)
+//						{
+//							preNode.msgQueue.removeFirst();
+//							break;
+//						}
+//						else
 						{
-							preNode.msgQueue.removeFirst();
-							break;
-						}
-						else
-						{
+							EpidemicCountTest.nodeMsgCount[node.indexInValidNodes]++;
 							preNode.copyMessageToAnotherNode(node, 1);
 							path.addSide(preNode.name, node.name, 1);
 							couple.fowardTimes++;

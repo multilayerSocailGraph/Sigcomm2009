@@ -13,7 +13,6 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
-
 import sigcom.routing.model.Node;
 
 class BeforeRouting 
